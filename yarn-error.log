@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/bin/node /usr/bin/yarn add ng-auto-complete
+  /usr/local/bin/node /usr/bin/yarn add prettier -D
 
 PATH: 
-  /home/vaibhav/.npm-global/bin:/home/vaibhav/bin:/home/vaibhav/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/vaibhav/Android/Sdk/tools:/home/vaibhav/Android/Sdk/platform-tools:/opt/spark/bin:/usr/share/maven//bin:/home/vaibhav/Android/Sdk/tools:/home/vaibhav/Android/Sdk/platform-tools:/opt/spark/bin:/usr/share/maven//bin
+  /home/vaibhav/.npm-global/bin:/home/vaibhav/bin:/home/vaibhav/.local/bin:/home/vaibhav/.npm-global/bin:/home/vaibhav/bin:/home/vaibhav/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/vaibhav/Android/Sdk/tools:/home/vaibhav/Android/Sdk/platform-tools:/opt/spark/bin:/usr/share/maven//bin:/home/vaibhav/Android/Sdk/tools:/home/vaibhav/Android/Sdk/platform-tools:/opt/spark/bin:/usr/share/maven//bin
 
 Yarn version: 
   0.24.4
@@ -21,15 +21,13 @@ npm manifest:
   	"scripts": {
   		"ng": "ng",
   		"start": "ng serve --aot",
-  		"build": "ng build --target production --buildOptimizer -cc -ec -aot -oh all --stats",
+  		"build":
+  			"ng build --target production --buildOptimizer -cc -ec -aot -oh all --stats",
   		"precommit": "lint-staged",
   		"bundle-report": "webpack-bundle-analyzer dist/stats.json"
   	},
   	"lint-staged": {
-  		"*.{ts,js,json,css,md}": [
-  			"prettier --write",
-  			"git add"
-  		]
+  		"*.{ts,js,json,css,md}": ["prettier --write", "git add"]
   	},
   	"private": true,
   	"dependencies": {
@@ -45,6 +43,8 @@ npm manifest:
   		"@angular/service-worker": "^5.0.0",
   		"api-ai-javascript": "^2.0.0-beta.12",
   		"core-js": "^2.4.1",
+  		"ng-auto-complete": "^2.7.14",
+  		"ng2-auto-complete": "^0.12.0",
   		"rxjs": "^5.5.2",
   		"zone.js": "^0.8.14"
   	},
@@ -415,6 +415,10 @@ Lockfile:
     dependencies:
       micromatch "^2.1.5"
       normalize-path "^2.0.0"
+  
+  api-ai-javascript@^2.0.0-beta.12:
+    version "2.0.0-beta.21"
+    resolved "https://registry.yarnpkg.com/api-ai-javascript/-/api-ai-javascript-2.0.0-beta.21.tgz#43465f6835dc4f0e14e0311c0bb64017f3148b5b"
   
   app-root-path@^2.0.0, app-root-path@^2.0.1:
     version "2.0.1"
@@ -836,10 +840,6 @@ Lockfile:
       caniuse-db "^1.0.30000639"
       electron-to-chromium "^1.2.7"
   
-  btoa@^1.1.2:
-    version "1.1.2"
-    resolved "https://registry.yarnpkg.com/btoa/-/btoa-1.1.2.tgz#3e40b81663f81d2dd6596a4cb714a8dc16cfabe0"
-  
   buffer-indexof@^1.0.0:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/buffer-indexof/-/buffer-indexof-1.1.1.tgz#52fabcc6a606d1a00302802648ef68f639da268c"
@@ -1242,7 +1242,7 @@ Lockfile:
     version "1.0.4"
     resolved "https://registry.yarnpkg.com/content-type/-/content-type-1.0.4.tgz#e138cc75e040c727b1966fe5e5f8c9aee256fe3b"
   
-  convert-source-map@^1.1.1, convert-source-map@^1.3.0:
+  convert-source-map@^1.3.0:
     version "1.5.1"
     resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.5.1.tgz#b8278097b9bc229365de5c62cf5fcaed8b5599e5"
   
@@ -1683,10 +1683,6 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/dns-txt/-/dns-txt-2.0.2.tgz#b91d806f5d27188e4ab3e7d107d881a1cc4642b6"
     dependencies:
       buffer-indexof "^1.0.0"
-  
-  docopt@^0.6.2:
-    version "0.6.2"
-    resolved "https://registry.yarnpkg.com/docopt/-/docopt-0.6.2.tgz#b28e9e2220da5ec49f7ea5bb24a47787405eeb11"
   
   dom-converter@~0.1:
     version "0.1.4"
@@ -3893,6 +3889,14 @@ Lockfile:
     version "0.6.1"
     resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
   
+  ng-auto-complete@^2.7.14:
+    version "2.7.14"
+    resolved "https://registry.yarnpkg.com/ng-auto-complete/-/ng-auto-complete-2.7.14.tgz#f4bede872f6993306137816132a3c7c069309fe0"
+  
+  ng2-auto-complete@^0.12.0:
+    version "0.12.0"
+    resolved "https://registry.yarnpkg.com/ng2-auto-complete/-/ng2-auto-complete-0.12.0.tgz#9a78c39c5012404e7bc8365c03815ab7f68cea3d"
+  
   no-case@^2.2.0:
     version "2.3.2"
     resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.2.tgz#60b813396be39b3f1288a4c1ed5d1e7d28b464ac"
@@ -4135,10 +4139,6 @@ Lockfile:
   onetime@^1.0.0:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/onetime/-/onetime-1.1.0.tgz#a1f7838f8314c516f05ecefcbc4ccfe04b4ed789"
-  
-  open@0.0.5:
-    version "0.0.5"
-    resolved "https://registry.yarnpkg.com/open/-/open-0.0.5.tgz#42c3e18ec95466b6bf0dc42f3a2945c3f0cad8fc"
   
   opener@^1.4.3:
     version "1.4.3"
@@ -5154,10 +5154,6 @@ Lockfile:
     dependencies:
       glob "^7.0.5"
   
-  rimraf@~2.2.6:
-    version "2.2.8"
-    resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
-  
   ripemd160@^2.0.0, ripemd160@^2.0.1:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/ripemd160/-/ripemd160-2.0.1.tgz#0f4584295c53a3628af7e6d79aca21ce57d1c6e7"
@@ -5471,19 +5467,6 @@ Lockfile:
     version "0.1.8"
     resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-0.1.8.tgz#c550b2ab5427f6b3f21f5afead88c4f5587b2106"
   
-  source-map-explorer@^1.5.0:
-    version "1.5.0"
-    resolved "https://registry.yarnpkg.com/source-map-explorer/-/source-map-explorer-1.5.0.tgz#654e2ba0db158fecfc99b9cefdf891b755b767d1"
-    dependencies:
-      btoa "^1.1.2"
-      convert-source-map "^1.1.1"
-      docopt "^0.6.2"
-      glob "^7.1.2"
-      open "0.0.5"
-      source-map "^0.5.1"
-      temp "^0.8.3"
-      underscore "^1.8.3"
-  
   source-map-loader@^0.2.0:
     version "0.2.3"
     resolved "https://registry.yarnpkg.com/source-map-loader/-/source-map-loader-0.2.3.tgz#d4b0c8cd47d54edce3e6bfa0f523f452b5b0e521"
@@ -5504,7 +5487,7 @@ Lockfile:
     dependencies:
       amdefine ">=0.0.4"
   
-  source-map@0.5.x, source-map@^0.5.1, source-map@^0.5.3, source-map@^0.5.6, source-map@~0.5.1:
+  source-map@0.5.x, source-map@^0.5.3, source-map@^0.5.6, source-map@~0.5.1:
     version "0.5.7"
     resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
   
@@ -5798,13 +5781,6 @@ Lockfile:
       fstream "^1.0.2"
       inherits "2"
   
-  temp@^0.8.3:
-    version "0.8.3"
-    resolved "https://registry.yarnpkg.com/temp/-/temp-0.8.3.tgz#e0c6bc4d26b903124410e4fed81103014dfc1f59"
-    dependencies:
-      os-tmpdir "^1.0.0"
-      rimraf "~2.2.6"
-  
   through2@^2.0.0:
     version "2.0.3"
     resolved "https://registry.yarnpkg.com/through2/-/through2-2.0.3.tgz#0004569b37c7c74ba39c43f3ced78d1ad94140be"
@@ -6038,10 +6014,6 @@ Lockfile:
   ultron@~1.1.0:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/ultron/-/ultron-1.1.1.tgz#9fe1536a10a664a65266a1e3ccf85fd36302bc9c"
-  
-  underscore@^1.8.3:
-    version "1.8.3"
-    resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
   
   uniq@^1.0.1:
     version "1.0.1"
@@ -6571,4 +6543,4 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.19.tgz#a4b522cd9e8b7b616a638c297d720d4c7f292f71"
 
 Trace: 
-  Error: EACCES: permission denied, mkdir '/home/vaibhav/Desktop/Angular Series/inventory-mgmt/node_modules/@angular/cli/node_modules/chalk'
+  Error: EACCES: permission denied, unlink '/home/vaibhav/Desktop/Angular Series/inventory-mgmt/node_modules/.bin/_ts-node'
