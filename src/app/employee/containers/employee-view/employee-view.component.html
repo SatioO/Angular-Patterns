@@ -1,0 +1,11 @@
+<sub-header title="Employee" (search)="handleSearch($event)"></sub-header>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row" *ngIf="employees$ | async; let employees; else loadingUserInfo">
+		<employee-card [employee]="employee" *ngFor="let employee of employees" class="col-sm-6 col-md-4"></employee-card>
+	</div>
+</div>
+
+<ng-template #loadingUserInfo>
+	Loading employee information...
+</ng-template>

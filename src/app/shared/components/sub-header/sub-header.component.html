@@ -1,0 +1,10 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-sm-8">
+    <h2>{{title}}</h2>
+  </div>
+  <h2 class="col-sm-4">
+    <form [formGroup]="searchForm">
+      <input type="text" class="form-control" formControlName="search" placeholder="Search here">
+    </form>
+  </h2>
+</div>

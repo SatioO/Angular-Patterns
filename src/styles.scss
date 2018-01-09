@@ -1,0 +1,90 @@
+/* You can add global styles to this file, and also import other style files */
+.file-upload {
+	margin: auto;
+	display: table;
+	top: 32px;
+	position: relative;
+	width: 100%;
+}
+
+.file-upload__label {
+	display: block;
+	color: #fff;
+	left: calc((100% - 158px)/2);
+	position: absolute;
+	background: #222;
+	border-radius: 0.4em;
+	transition: background 0.3s;
+	width: 158px;
+	height: 200px;
+	text-align: center;
+	cursor: hand;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.file-upload__input {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	font-size: 1;
+	width: 0;
+	height: 100%;
+	opacity: 0;
+}
+
+label.file-upload__label::after {
+	display: block;
+	content: "browse";
+	position: absolute;
+	bottom: 0;
+	padding: 10px 0px;
+	text-align: center;
+	width: 158px;
+	cursor: pointer;
+	background-color: rgba(255, 255, 255, 0.3);
+}
+
+.manage-input {
+	width: 25%;
+	display: inline-block;
+}
+
+::-webkit-input-placeholder {
+	/* Chrome/Opera/Safari */
+	font-size: 12px;
+}
+::-moz-placeholder {
+	/* Firefox 19+ */
+	font-size: 12px;
+}
+:-ms-input-placeholder {
+	/* IE 10+ */
+	font-size: 12px;
+}
+:-moz-placeholder {
+	/* Firefox 18- */
+	font-size: 12px;
+}
+
+.col-sm-3 {
+	margin-top: 5px;
+}
+
+.ng-dirty.ng-invalid {
+	border-color: #ed5565;
+}
+
+.relations {
+	float: left !important;
+	vertical-align: middle;
+	margin-top: 5px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.form-control {
+	font-size: 12px !important;
+}

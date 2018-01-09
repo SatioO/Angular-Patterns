@@ -1,0 +1,26 @@
+<div class="contact-box">
+  <a href="" [routerLink]="[employee.Emp_ID]">
+    <div class="col-sm-4">
+      <div class="text-center">
+        <img alt="image" class="img-circle m-t-xs img-responsive" src="images/a4.jpg">
+        <div class="m-t-xs font-bold">Employee {{employee.Emp_ID}}</div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <h3>
+        <strong>{{employee.Emp_Name}} {{employee.Emp_Surname}}</strong>
+      </h3>
+      <p>
+        <i class="fa fa-map-marker"></i> {{employee.Emp_City}}, {{employee.Emp_Country}}
+      </p>
+      <address>
+        <strong>{{employee.Emp_Email1}}</strong>
+        <br />
+        <br> {{employee.Emp_Add1 | slice:0:28 }} ...
+        <br>
+        <abbr title="Phone">P:</abbr> ({{employee.Emp_MCode}}) {{employee.Emp_Phone}}
+      </address>
+    </div>
+    <div class="clearfix"></div>
+  </a>
+</div>

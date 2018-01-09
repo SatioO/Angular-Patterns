@@ -1,0 +1,80 @@
+<form role="form" [formGroup]="personalForm">
+    <div class="col-sm-12 col-xs-12">
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <label style="display:block;">First Name</label>
+                <select class="form-control" style="width:35%; display: inline-block" [attr.disabled]="view ? '': null" formControlName="Con_Title">
+                    <option *ngFor="let option of store[type.TITLE]" [selected]="option.AttributeValue === Con_Title" [value]="option.AttributeValue">{{option.AttributeValue}}</option>
+                </select>
+                <input type="text" class="form-control" style="width:calc(65% - 4px);display:inline-block;" placeholder="First Name" [attr.disabled]="view ? '': null"
+                    formControlName="Con_Name">
+            </div>
+            <div class="col-sm-3">
+                <label>Middle Name</label>
+                <input type="text" class="form-control" [attr.disabled]="view ? '': null" formControlName="Con_MName" placeholder="Middle Name">
+            </div>
+            <div class="col-sm-3">
+                <label>Last Name</label>
+                <input type="text" class="form-control" [attr.disabled]="view ? '': null" formControlName="Con_Surname" placeholder="Last Name">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-3 col-xs-6">
+                <label>Contact Type</label>
+                <select class="form-control c-select" [attr.disabled]="view ? '': null" formControlName="Con_Type">
+                    <option *ngFor="let option of store[type.CONTACT_TYPE]" [selected]="option.AttributeValue === Con_Type" [value]="option.AttributeValue">{{option.AttributeValue}}</option>
+                </select>
+            </div>
+            <div class="col-sm-3 col-xs-12">
+                <label>Date of birth</label>
+                <input type="date" class="form-control" [attr.disabled]="view ? '': null" formControlName="Con_DOB" placeholder="">
+            </div>
+            <div class="col-sm-3 col-xs-12">
+                <label>Date of Anniversary</label>
+                <input type="date" class="form-control" [attr.disabled]="view ? '': null" formControlName="Con_Ann_Date" placeholder="">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-3 col-xs-12">
+                <label>Company name</label>
+                <input ng2-auto-complete formControlName="Con_Company_Id" [source]="companies" [list-formatter]="autocompleListFormatter"
+                    value-property-name="BM_No" display-property-name="BM_Company_Name" placeholder="Company name" class="form-control">
+            </div>
+            <div class="col-sm-3 col-xs-12">
+                <label>Department</label>
+                <input type="text" class="form-control" [attr.disabled]="true" formControlName="Con_Department" placeholder="">
+            </div>
+            <div class="col-sm-3 col-xs-12">
+                <label>Designation</label>
+                <input type="date" class="form-control" [attr.disabled]="view ? '': null" formControlName="Con_Designation" placeholder="">
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <label>Contact owner</label>
+
+                <select class="form-control c-select" [attr.disabled]="view ? '': null" formControlName="Con_Type">
+                    <option *ngFor="let option of owners" [value]="option">{{option}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-3 col-xs-12">
+                <label>Facebook</label>
+                <input type="text" class="form-control" [attr.disabled]="view ? '': null" formControlName="Con_Linkedin" placeholder="">
+            </div>
+            <div class="col-sm-3 col-xs-12">
+                <label>Twitter</label>
+                <input type="text" class="form-control" [attr.disabled]="view ? '': null" formControlName="Con_Fb" placeholder="">
+            </div>
+            <div class="col-sm-3 col-xs-12">
+                <label>Linkedin</label>
+                <input type="text" class="form-control" [attr.disabled]="view ? '': null" formControlName="Con_Twitter" placeholder="">
+            </div>
+        </div>
+
+        <br />
+        <button type="submit" (click)="handleTabs('contact')" *ngIf="!view" [disabled]="personalForm.status !=='VALID'" class="btn btn-success">Next</button>
+    </div>
+</form>

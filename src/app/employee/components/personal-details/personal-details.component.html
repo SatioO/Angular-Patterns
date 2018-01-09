@@ -1,0 +1,89 @@
+<form role="form" [formGroup]="employeeForm">
+  <div class="col-sm-9 col-xs-12">
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <label style="display:block;">First Name</label>
+        <select class="form-control" style="width:35%; display: inline-block" [attr.disabled]="view ? '': null" formControlName="Emp_Title">
+          <option *ngFor="let option of title" [selected]="option.AttributeValue === Emp_Title" [value]="option.AttributeValue">{{option.AttributeValue}}</option>
+        </select>
+        <input type="text" class="form-control" style="width:calc(65% - 4px);display:inline-block;" placeholder="First Name" [attr.disabled]="view ? '': null"
+          formControlName="Emp_Name">
+      </div>
+      <div class="col-sm-4">
+        <label>Middle Name</label>
+        <input type="text" class="form-control" [attr.disabled]="view ? '': null" formControlName="Emp_MName" placeholder="Middle Name">
+      </div>
+      <div class="col-sm-4">
+        <label>Last Name</label>
+        <input type="text" class="form-control" [attr.disabled]="view ? '': null" formControlName="Emp_Surname" placeholder="Last Name">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-4 col-xs-12">
+        <label>Date of birth</label>
+        <input type="date" class="form-control" [attr.disabled]="view ? '': null" formControlName="Emp_DOB" placeholder="">
+      </div>
+      <div class="col-sm-4 col-xs-6">
+        <label>Gender</label>
+        <select class="form-control c-select" [attr.disabled]="view ? '': null" formControlName="Emp_Gender">
+          <option *ngFor="let option of genders" [selected]="option.AttributeValue === Emp_Gender" [value]="option.AttributeValue">{{option.AttributeValue}}</option>
+        </select>
+      </div>
+      <div class="col-sm-4 col-xs-6">
+        <label>Blood Group</label>
+        <select class="form-control c-select" [attr.disabled]="view ? '': null" formControlName="Emp_BloodG">
+          <option *ngFor="let group of bloodgroups" [selected]="group.AttributeValue === Emp_BloodG" [value]="group.AttributeValue">{{group.AttributeValue}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <label>Marital Status</label>
+        <select class="form-control" [attr.disabled]="view ? '': null" formControlName="Emp_Marital_Status" (change)="handleMartialStatus()">
+          <option *ngFor="let status of martialstatus" [selected]="status.AttributeValue === Emp_Marital_Status" [value]="status.AttributeValue">{{status.AttributeValue}}</option>
+        </select>
+      </div>
+      <div class="col-sm-4">
+        <label>Date Of Anniversary</label>
+        <input type="date" class="form-control" placeholder="" [attr.disabled]="view ? '': null" formControlName="Emp_DOAnni">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <label>Email Address</label>
+        <input type="email" class="form-control" placeholder="Email Address" [attr.disabled]="view ? '': null" formControlName="Emp_Email1">
+      </div>
+      <div class="col-sm-4">
+        <label>Alternate Email Address</label>
+        <input type="email" class="form-control" placeholder="Email Address" [attr.disabled]="view ? '': null" formControlName="Emp_Email2">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <label>Facebook Link</label>
+        <input type="text" class="form-control" placeholder="Facebook Link" [attr.disabled]="view ? '': null" formControlName="Emp_FB"> </div>
+      <div class="col-sm-4">
+        <label>LinkedIn Link</label>
+        <input type="text" class="form-control" placeholder="LinkedIn Link" [attr.disabled]="view ? '': null" formControlName="Emp_Linkedin"> </div>
+      <div class="col-sm-4">
+        <label>Twitter Link</label>
+        <input type="text" class="form-control" placeholder="Twitter Link" [attr.disabled]="view ? '': null" formControlName="Emp_Twitter"> </div>
+    </div>
+
+    <br />
+    <button type="submit" (click)="handleTabs('contact')" *ngIf="!view" [disabled]="employeeForm.status !== 'VALID'" class="btn btn-success">Next</button>
+  </div>
+  <div class="col-sm-3 col-xs-12" style="min-height:250px;">
+    <h4 class="text-center">{{selectedFile?.name}}</h4>
+    <div class="file-upload text-center">
+      <label for="upload" id="uploaded-image" class="file-upload__label"></label>
+      <input id="upload" [attr.disabled]="view ? '': null" class="file-upload__input" accept="image/*" type="file" name="file-upload"
+        (change)="onFileChange($event)">
+      <input type="hidden" name="fileHidden" formControlName="Emp_Pic_Upload" />
+    </div>
+  </div>
+</form>
