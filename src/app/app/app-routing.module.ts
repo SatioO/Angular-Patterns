@@ -13,6 +13,15 @@ const ROUTES: Routes = [
 		loadChildren: "../employee/employee.module#EmployeeModule"
 	},
 	{
+		path: "enquiry",
+		loadChildren: "../enquiry/enquiry.module#EnquiryModule"
+	},
+	{
+		path: "business_partner",
+		loadChildren:
+			"../business_partner/business_partner.module#Business_Partner_Module"
+	},
+	{
 		path: "contact",
 		loadChildren: "../contact/contact.module#ContactModule"
 	},

@@ -1,0 +1,41 @@
+<div class="col-sm-12">
+  <div class="tabs-container">
+    <ul class="nav nav-tabs">
+      <li [class.active]="tabs.personaldetais === true">
+        <a data-toggle="tab" href="" (click)="handleTabs($event, { name: 'personaldetais'})"> Personal Details</a>
+      </li>
+      <li [class.active]="tabs.documentdetails === true">
+        <a data-toggle="tab" href="" (click)="handleTabs($event, { name: 'documentdetails' })">Document Details</a>
+      </li>
+      <li [class.active]="tabs.bankdetails === true">
+        <a data-toggle="tab" href="" (click)="handleTabs($event, { name: 'bankdetails' })">Bank Details</a>
+      </li>
+      <li [class.active]="tabs.contactdetails === true">
+        <a data-toggle="tab" href="" (click)="handleTabs($event, { name: 'contactdetails' })">Contact Details</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div id="tab-1" class="tab-pane" [class.active]="tabs.personaldetais === true">
+        <div class="panel-body">
+          <personal-details [store]="store$ | async" [view]="viewmode" (tabs)="handleTabs(null, $event)"></personal-details>
+        </div>
+      </div>
+      <div id="tab-2" class="tab-pane" [class.active]="tabs.documentdetails === true">
+        <div class="panel-body">
+          <document-details [store]="store$ | async" [view]="viewmode" (tabs)="handleTabs(null, $event)"></document-details>
+        </div>
+      </div>
+      <div id="tab-3" class="tab-pane" [class.active]="tabs.bankdetails === true">
+        <div class="panel-body">
+          <bank-details [store]="store$ | async" [view]="viewmode" (tabs)="handleTabs(null, $event)"></bank-details>
+        </div>
+      </div>
+      <div id="tab-4" class="tab-pane" [class.active]="tabs.contactdetails === true">
+        <div class="panel-body">
+          <contact-details [store]="store$ | async" [view]="viewmode" [countries]="countries$ | async" [cities]="cities$ | async" [states]="states$ | async"
+            (tabs)="handleTabs(null, $event)" (toggle)="handleToggle($event)"></contact-details>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

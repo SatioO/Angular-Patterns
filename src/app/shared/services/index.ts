@@ -10,5 +10,7 @@ export const MARITAL_STATUS = "MARITAL STATUS";
 export const RELATIONSHIP = "RELATIONSHIP";
 export const ENTITY_TYPE = "ENTITY TYPE";
 export const CONTACT_TYPE = "CONTACT TYPE";
+export const INDUSTRY = "INDUSTRY";
+export const DEPARTMENT = "DEPARTMENT";
 
 export * from "./store.service";

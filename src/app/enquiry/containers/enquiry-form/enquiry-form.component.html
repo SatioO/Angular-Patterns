@@ -1,0 +1,149 @@
+<form role="form" [formGroup]="enquiryForm">
+    <div class="col-sm-12 col-xs-12">
+        <div class="form-group row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="row ">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="disp-inline halfwidth ">
+                                        <label>Enquiry No.</label>
+                                    </div>
+                                    <div class="disp-inline col-sm-6 no-padding">
+                                        <input class="form-control" placeholder="" type="text"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <label> Enquiry Number</label>
+                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Enq_Num" placeholder="Enquiry Number">
+            </div>
+
+            <div class="col-sm-3">
+                <label>Business Type</label>
+                <select class="form-control" [attr.disabled]="view ? '' : null" formControlName="Business_Type">
+                    <option> Source 1 </option>
+                    <option> Source 2 </option>
+                </select>
+            </div>
+
+            <div class="col-sm-3">
+                <label>Enquiry Type</label>
+                <!--   <select class="form-control" style="width:35%; display: inline-block" [attr.disabled]="view ? '' : null" formControlName="Enq_Type">
+                 <option *ngFor="let option of title" [selected]="option.AttributeValue === Enq_Type" [value]="option.AttributeValue">{{option.AttributeValue}}</option>
+               </select> -->
+                <select class="form-control" [attr.disabled]="view ? '' : null" formControlName="Source">
+                    <option> Source 1 </option>
+                    <option> Source 2 </option>
+                </select>
+            </div>
+
+            <div class="col-sm-3">
+                <label>Source</label>
+                <select class="form-control" [attr.disabled]="view ? '' : null" formControlName="Source">
+                    <option> Source 1 </option>
+                    <option> Source 2 </option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <div class="col-sm-3">
+                <label>Date</label>
+                <input type="date" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Enq_Date" placeholder="">
+            </div>
+
+            <div class="col-sm-3">
+                <label>Company Name</label>
+                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Company_Name" placeholder="Company Name">
+            </div>
+
+            <div class="col-sm-3">
+                <label>Contact Person Name</label>
+                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Contact_Name" placeholder="Person Name">
+            </div>
+
+            <div class="col-sm-3">
+                <label>Sales Representative</label>
+                <!-- <select class="form-control c-select" [attr.disabled]="view ? '' : null" formControlName="Sale_Rep">
+                    <option *ngFor="let group of bloodgroup" [selected]="group.AttributeValue === Enq_Sale" [value]="group.AttributeValue">{{group.AttributeValue}}</option>
+                </select>-->
+                <select class="form-control" [attr.disabled]="view ? '' : null" formControlName="Sale_Rep">
+                    <option> Source 1 </option>
+                    <option> Source 2 </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+
+            <div class="col-sm-3">
+                <label>Stage</label>
+                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Stage" placeholder="Stage">
+            </div>
+
+            <div class="col-sm-3">
+                <label>Stage Reason</label>
+                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Stage_Reason" placeholder="Company Name">
+            </div>
+        </div>
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  row">
+            <button class="add-enquiry" (click)="onAddEnquiry($event)">
+                <i class="material-icons">add</i>
+            </button>
+            <button class="remove-enquiry" (click)="onRemoveEnquiry($event)">
+                <i class="material-icons">remove</i>
+            </button>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+            <div class="seperator"></div>
+        </div>
+
+        <div class="enquiry-items col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngFor="let member of enquiry; let i = index;" [attr.data-index]="i">
+           
+            <div class="form-group row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-sm-2">
+                        <label>Part Number</label>
+                        <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Part_Number" placeholder="Part Number">
+                    </div>
+                    <div class="col-sm-2">
+                        <label>Product</label>
+                        <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Product" placeholder="Product">
+                    </div>
+                    <div class="col-sm-2">
+                        <label>Quantity</label>
+                        <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Quantity" placeholder="Quantity">
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Client Description</label>
+                        <input style="width:100%" type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Client_desc"
+                            placeholder="Client Description">
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label>Remark</label>
+                        <input style="width:100%" type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Remark" placeholder="Remark">
+                    </div>
+                </div>
+            </div>
+
+            <div class="seperator"></div>
+        </div>
+
+
+        <br /> <br/> <br/> <br/>
+        <button type="submit" [disabled]="enquiryForm.status !== 'VALID'" class="btn btn-success">Save</button>
+        <button type="submit" [disabled]="enquiryForm.status !== 'VALID'" class="btn btn-success">Clear</button>
+    </div>
+</form>

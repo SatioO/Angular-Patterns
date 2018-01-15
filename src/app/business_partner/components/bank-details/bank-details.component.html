@@ -1,0 +1,46 @@
+<form role="form" [formGroup]="bankForm">
+    <div class="col-xs-12">
+        <div class="panel panel-default" style="border:none;">
+            <div class="panel-heading text-right" style="border:none;">
+                <span class="relations" *ngIf="!view">Bank Details</span>
+                <h4 *ngIf="view" class="text-left">Relations</h4>
+                <div class="btn-group" *ngIf="!view">
+                    <button type="button" [attr.disabled]="view ? '' : null" (click)="handleAdd()" class="btn btn-sm btn-primary">Add</button>&nbsp; &nbsp; &nbsp; &nbsp;
+
+                    <button type="button" [attr.disabled]="view ? '' : null" (click)="handleRemove()" class="btn btn-sm btn-danger">Remove</button>
+                </div>
+            </div>
+            <div class="panel-body" style="border:none;">
+                <div class="form-group row" *ngFor="let i of bank;">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <label>Beneficiary Name</label>
+                        <input type="text" [attr.disabled]="view ? '' : null" class="form-control" [formControlName]="'Bank_FC'+ i + '_BeneficiaryName'"
+                            placeholder="Beneficiary Name">
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <label style="display:block;">Bank Name</label>
+                        <input type="text" [attr.disabled]="view ? '' : null" class="form-control" [formControlName]="'Bank_FC'+ i + '_BankName'"
+                            placeholder="Bank Name">
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <label>Bank Branch </label>
+                        <input type="text" [attr.disabled]="view ? '' : null" class="form-control" [formControlName]="'Bank_FC'+ i + '_BankBranch'"
+                            placeholder="Bank Branch">
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <label>Bank A/C Number </label>
+                        <input type="text" [attr.disabled]="view ? '' : null" class="form-control" [formControlName]="'Bank_FC'+ i + '_BankNumber'"
+                            placeholder="Bank A/C Number">
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <label>Bank IFSC Code </label>
+                        <input type="text" [attr.disabled]="view ? '' : null" class="form-control" [formControlName]="'Bank_FC'+ i + '_BankIFSC'"
+                            placeholder="Bank IFSC Code">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" (click)="handleTabs('contactdetails')" [disabled]="bankForm.status !== 'VALID'" class="btn btn-success">Next</button>
+        <input type="button" (click)="handleTabs('documentdetails', 'VALID')" value="back" class="btn btn-danger" />
+    </div>
+</form>
