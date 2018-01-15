@@ -13,7 +13,7 @@ import * as fromShared from "../../../shared";
 // services
 import * as fromServices from "../../services";
 // models
-import { Tabs } from "../../models";
+import * as fromModels from "../../models";
 
 @Component({
 	selector: "employee-form",
@@ -30,7 +30,7 @@ export class EmployeeFormComponent implements OnInit {
 	states$: Observable<fromShared.State[]>;
 	cities$: Observable<fromShared.City[]>;
 
-	tabs: Tabs = {
+	tabs: fromModels.Tabs = {
 		personal: true,
 		contact: false,
 		family: false,

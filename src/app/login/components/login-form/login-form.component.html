@@ -1,0 +1,17 @@
+<div class="col-md-6">
+    <div class="ibox-content">
+        <form role="form" class="m-t" [formGroup]="loginForm">
+            <div class="form-group">
+                <input type="email" class="form-control" formControlName="User_Login" placeholder="Username" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" formControlName="User_Password" placeholder="Password" required="">
+            </div>
+            <button type="submit" (click)="handleLogin()" [disabled]="loginForm.status !=='VALID'" class="btn btn-primary block full-width m-b">Login</button>
+
+            <a href="">
+                <small>Forgot password?</small>
+            </a>
+        </form>
+    </div>
+</div>
