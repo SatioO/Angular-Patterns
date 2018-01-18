@@ -1,4 +1,3 @@
-import { ToastrModule } from "./../toaster/toastr.module";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule } from "@angular/forms";

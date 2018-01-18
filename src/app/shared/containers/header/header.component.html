@@ -1,16 +1,21 @@
 <div class="row border-bottom white-bg">
   <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
-      <span minimiza-sidebar>
+      <span *ngIf="isLoggedIn" minimiza-sidebar>
         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary ">
           <i class="fa fa-bars"></i>
         </a>
       </span>
     </div>
     <ul class="nav navbar-top-links navbar-right pull-right">
-      <li>
+      <li *ngIf="!isLoggedIn">
         <a href="" routerLink="/login">
-          <i class="fa fa-sign-out"></i> LogIn
+          <i class="fa fa-sign-in"></i> LogIn
+        </a>
+      </li>
+      <li *ngIf="isLoggedIn">
+        <a href="" (click)="handleLogout($event)">
+          <i class="fa fa-sign-out"></i> Logout
         </a>
       </li>
     </ul>

@@ -17,10 +17,11 @@
 			"prefix": "app",
 			"styles": [
 				"styles.scss",
+				"assets/styles/alertify.css",
 				"assets/styles/bootstrap.min.css",
 				"assets/styles/style.css"
 			],
-			"scripts": [],
+			"scripts": ["assets/js/alertify.js"],
 			"environmentSource": "environments/environment.ts",
 			"environments": {
 				"dev": "environments/environment.ts",

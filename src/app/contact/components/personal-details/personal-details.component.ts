@@ -58,6 +58,14 @@ export class PersonalDetailsComponent implements OnInit {
 			Con_Twitter: new FormControl(""),
 			Con_Fb: new FormControl("")
 		});
+
+		this.personalForm.get("Con_Company_Id").valueChanges.subscribe(val => {
+			if (typeof val === "object") {
+				this.personalForm.patchValue({
+					Con_Department: val.BM_Department
+				});
+			}
+		});
 	}
 
 	handleTabs(name) {

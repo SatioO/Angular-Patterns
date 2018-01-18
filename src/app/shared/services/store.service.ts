@@ -16,6 +16,10 @@ export class StoreService {
 
 	constructor(private _http: HttpClient) {}
 
+	checkAuth() {
+		return !!localStorage.getItem("user");
+	}
+
 	getCountries(): Observable<fromModels.Country[]> {
 		return this._http.get<fromModels.Country[]>(
 			`${environment.baseUrl}/store/countries`

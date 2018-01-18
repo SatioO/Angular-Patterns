@@ -1,4 +1,3 @@
-import { ToastrModule } from "../../toaster/toastr.module";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
@@ -11,6 +10,8 @@ import * as fromContainers from "../containers";
 import * as fromComponents from "../components";
 // services
 import * as fromServices from "../services";
+// guards
+import * as fromGuards from "../guards";
 
 @NgModule({
 	declarations: [
@@ -18,13 +19,12 @@ import * as fromServices from "../services";
 		...fromComponents.components,
 		...fromDirectives.directives
 	],
-	imports: [CommonModule, RouterModule, ReactiveFormsModule, ToastrModule],
-	providers: [...fromServices.services],
+	imports: [CommonModule, RouterModule, ReactiveFormsModule],
+	providers: [...fromServices.services, ...fromGuards.guards],
 	exports: [
 		...fromContainers.containers,
 		...fromComponents.components,
-		...fromDirectives.directives,
-		ToastrModule
+		...fromDirectives.directives
 	]
 })
 export class SharedModule {}

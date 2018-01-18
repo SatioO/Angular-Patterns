@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/bin/node /usr/bin/yarn add prettier -D
+  /usr/local/bin/node /usr/bin/yarn
 
 PATH: 
-  /home/vaibhav/.npm-global/bin:/home/vaibhav/bin:/home/vaibhav/.local/bin:/home/vaibhav/.npm-global/bin:/home/vaibhav/bin:/home/vaibhav/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/vaibhav/Android/Sdk/tools:/home/vaibhav/Android/Sdk/platform-tools:/opt/spark/bin:/usr/share/maven//bin:/home/vaibhav/Android/Sdk/tools:/home/vaibhav/Android/Sdk/platform-tools:/opt/spark/bin:/usr/share/maven//bin
+  /home/vaibhav/.npm-global/bin:/home/vaibhav/bin:/home/vaibhav/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/vaibhav/Android/Sdk/tools:/home/vaibhav/Android/Sdk/platform-tools:/opt/spark/bin:/usr/share/maven//bin:/home/vaibhav/Android/Sdk/tools:/home/vaibhav/Android/Sdk/platform-tools:/opt/spark/bin:/usr/share/maven//bin
 
 Yarn version: 
   0.24.4
@@ -21,13 +21,15 @@ npm manifest:
   	"scripts": {
   		"ng": "ng",
   		"start": "ng serve --aot",
-  		"build":
-  			"ng build --target production --buildOptimizer -cc -ec -aot -oh all --stats",
+  		"build": "ng build --target production --buildOptimizer -cc -ec -aot -oh all --stats",
   		"precommit": "lint-staged",
   		"bundle-report": "webpack-bundle-analyzer dist/stats.json"
   	},
   	"lint-staged": {
-  		"*.{ts,js,json,css,md}": ["prettier --write", "git add"]
+  		"*.{ts,js,json,css,md}": [
+  			"prettier --write",
+  			"git add"
+  		]
   	},
   	"private": true,
   	"dependencies": {
@@ -41,10 +43,10 @@ npm manifest:
   		"@angular/platform-browser-dynamic": "^5.0.0",
   		"@angular/router": "^5.0.0",
   		"@angular/service-worker": "^5.0.0",
-  		"api-ai-javascript": "^2.0.0-beta.12",
   		"core-js": "^2.4.1",
   		"ng-auto-complete": "^2.7.14",
   		"ng2-auto-complete": "^0.12.0",
+  		"ng2-toastr": "^4.1.2",
   		"rxjs": "^5.5.2",
   		"zone.js": "^0.8.14"
   	},
@@ -66,6 +68,7 @@ npm manifest:
   		"karma-jasmine": "~1.1.0",
   		"karma-jasmine-html-reporter": "^0.2.2",
   		"lint-staged": "^6.0.0",
+  		"prettier": "^1.9.2",
   		"protractor": "~5.1.2",
   		"ts-node": "~3.2.0",
   		"tslint": "~5.7.0",
@@ -4705,6 +4708,10 @@ Lockfile:
     version "0.2.0"
     resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
   
+  prettier@^1.9.2:
+    version "1.9.2"
+    resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.9.2.tgz#96bc2132f7a32338e6078aeb29727178c6335827"
+  
   pretty-error@^2.0.2:
     version "2.1.1"
     resolved "https://registry.yarnpkg.com/pretty-error/-/pretty-error-2.1.1.tgz#5f4f87c8f91e5ae3f3ba87ab4cf5e03b1a17f1a3"
@@ -6543,4 +6550,4 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.19.tgz#a4b522cd9e8b7b616a638c297d720d4c7f292f71"
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/home/vaibhav/Desktop/Angular Series/inventory-mgmt/node_modules/.bin/_ts-node'
+  Error: EACCES: permission denied, unlink '/home/vaibhav/Desktop/Angular Series/inventory-mgmt/node_modules/.yarn-integrity'

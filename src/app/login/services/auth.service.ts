@@ -6,20 +6,22 @@ import { Observable } from "rxjs/Observable";
 import { catchError } from "rxjs/operators/catchError";
 // services
 import * as fromModels from "../models";
-import { ToastrService } from "../../toaster/toastr.service";
 
 @Injectable()
 export class AuthService {
-	constructor(private _http: HttpClient, private toast: ToastrService) {}
+	constructor(private _http: HttpClient) {}
 
-	login(user: fromModels.User): Observable<string> {
+	login(user: fromModels.User): Observable<fromModels.User> {
 		return this._http
-			.post<fromModels.User>(`${environment.baseUrl}/login`, user)
-			.pipe(
-				catchError(error => {
-					this.toast.info(error.message);
-					return Observable.of(error.message);
-				})
-			);
+			.post<fromModels.User>(`${environment.baseUrl}/auth/login`, user)
+			.pipe(catchError((err: any) => Observable.throw(err)));
+	}
+
+	saveInfo(data) {
+		localStorage.setItem("user", JSON.stringify(data));
+	}
+
+	getToken() {
+		return JSON.parse(localStorage.getItem("user")).Token;
 	}
 }

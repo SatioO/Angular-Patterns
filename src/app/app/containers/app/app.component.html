@@ -2,13 +2,13 @@
 <div id="wrapper">
 
 	<!-- Navigation -->
-	<sidebar-app></sidebar-app>
+	<sidebar-app *ngIf="isLoggedIn"></sidebar-app>
 
 	<!-- Page wraper -->
-	<div id="page-wrapper" class="gray-bg">
+	<div class="gray-bg" [ngClass]="{ 'page-wrapper': isLoggedIn }">
 
 		<!-- Header -->
-		<header-app></header-app>
+		<header-app [isLoggedIn]="isLoggedIn"></header-app>
 
 		<!-- Main App -->
 		<router-outlet></router-outlet>

@@ -26,18 +26,12 @@ export class ContactService {
 
 	getCompanies(): Observable<fromModels.Company[]> {
 		const body = {
-			fields: "BM_No, BM_Company_Name"
+			fields: "BM_No, BM_Company_Name, BM_Department"
 		};
 
-		return this._http
-			.post<fromModels.Company[]>(
-				`${environment.baseUrl}/company/list`,
-				body
-			)
-			.pipe(
-				map(company => {
-					return company;
-				})
-			);
+		return this._http.post<fromModels.Company[]>(
+			`${environment.baseUrl}/company/list`,
+			body
+		);
 	}
 }
