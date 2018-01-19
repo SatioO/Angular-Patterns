@@ -31,9 +31,11 @@ export class ContactFormComponent implements OnInit {
 	cities$: Observable<fromShared.City[]>;
 
 	tabs: fromModels.Tabs = {
-		personal: false,
-		contact: true
+		personal: true,
+		contact: false
 	};
+
+	payload: { [key: string]: object } = {};
 
 	constructor(
 		private _contact: fromServices.ContactService,
@@ -52,6 +54,18 @@ export class ContactFormComponent implements OnInit {
 	handleTabs(event, form?): void {
 		if (!!event) {
 			event.preventDefault();
+		}
+
+		if (!this.viewmode && form.status !== "VALID") {
+			return;
+		}
+
+		if (!form.back) {
+			this.payload[form.name] = form.values;
+
+			if (!!form.submit) {
+				console.log(this.payload);
+			}
 		}
 
 		this.tabs = {
