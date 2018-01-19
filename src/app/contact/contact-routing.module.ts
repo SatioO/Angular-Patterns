@@ -10,6 +10,10 @@ const ROUTES: Routes = [
 	{
 		path: "create",
 		component: fromContainers.ContactFormComponent
+	},
+	{
+		path: "view",
+		component: fromContainers.ContactViewComponent
 	}
 ];
 
