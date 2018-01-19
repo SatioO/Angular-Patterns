@@ -19,25 +19,25 @@
         <div class="form-group row">
             <div class="col-sm-3">
                 <label>Country</label>
-                <select class="form-control" (change)="handleToggle('country', $event)" [attr.disabled]="view ? '': null" formControlName="Emp_Country">
-                    <option *ngFor="let country of countries" [selected]="country.id === Emp_Country" [value]="country.id">{{country.name}}</option>
+                <select class="form-control" (change)="handleToggle('country', $event)" [attr.disabled]="view ? '': null" formControlName="Con_Country">
+                    <option *ngFor="let country of countries" [selected]="country.id === Con_Country" [value]="country.id">{{country.name}}</option>
                 </select>
             </div>
             <div class="col-sm-3">
                 <label>State</label>
-                <select class="form-control" (change)="handleToggle('states', $event)" [attr.disabled]="view ? '': null" formControlName="Emp_State">
-                    <option *ngFor="let state of states" [selected]="state.id === Emp_State" [value]="state.id">{{state.name}}</option>
+                <select class="form-control" (change)="handleToggle('states', $event)" [attr.disabled]="view ? '': null" formControlName="Con_State">
+                    <option *ngFor="let state of states" [selected]="state.id === Con_State" [value]="state.id">{{state.name}}</option>
                 </select>
             </div>
             <div class="col-sm-3">
                 <label>City</label>
-                <select class="form-control" [attr.disabled]="view ? '': null" formControlName="Emp_City">
-                    <option *ngFor="let city of cities" [selected]="city.id === Emp_City" [value]="city.id">{{city.name}}</option>
+                <select class="form-control" [attr.disabled]="view ? '': null" formControlName="Con_City">
+                    <option *ngFor="let city of cities" [selected]="city.id === Con_City" [value]="city.id">{{city.name}}</option>
                 </select>
             </div>
             <div class="col-sm-3">
                 <label>Pincode</label>
-                <input type="number" class="form-control" placeholder="Pincode" [attr.disabled]="view ? '': null" formControlName="Emp_Pincode">
+                <input type="number" class="form-control" placeholder="Pincode" [attr.disabled]="view ? '': null" formControlName="Con_Pincode">
             </div>
         </div>
 

@@ -22,7 +22,7 @@ import * as fromServices from "../../services";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactFormComponent implements OnInit {
-	@Input() viewmode: boolean = false;
+	@Input() viewmode: boolean;
 
 	store$: Observable<{}>;
 
@@ -44,10 +44,9 @@ export class ContactFormComponent implements OnInit {
 		this.store$ = forkJoin([
 			this._store.populate(fromShared.TITLE, fromShared.CONTACT_TYPE),
 			this._contact.getEmployees(),
-			this._contact.getCompanies()
+			this._contact.getCompanies(),
+			this._store.getCountries()
 		]).pipe(share());
-
-		this.countries$ = this._store.getCountries();
 	}
 
 	handleTabs(event, form?): void {
