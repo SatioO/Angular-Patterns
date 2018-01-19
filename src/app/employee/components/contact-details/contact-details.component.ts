@@ -32,7 +32,6 @@ export class ContactDetailsComponent implements OnInit {
 	@Input() states: fromShared.State[];
 
 	@Output() tabs: EventEmitter<any> = new EventEmitter<any>();
-
 	@Output() toggle: EventEmitter<any> = new EventEmitter<any>();
 
 	contactForm: FormGroup;

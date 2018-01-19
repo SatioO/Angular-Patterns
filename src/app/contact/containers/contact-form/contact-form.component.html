@@ -16,7 +16,8 @@
             </div>
             <div id="tab-2" class="tab-pane" [class.active]="tabs.contact === true">
                 <div class="panel-body">
-                    <contact-details></contact-details>
+                    <contact-details [countries]="countries$ | async" [cities]="cities$ | async" [states]="states$ | async" (tabs)="handleTabs(null, $event)"
+                        (toggle)="handleToggle($event)"></contact-details>
                 </div>
             </div>
             <br />

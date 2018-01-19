@@ -26,9 +26,13 @@ export class ContactFormComponent implements OnInit {
 
 	store$: Observable<{}>;
 
+	countries$: Observable<fromShared.Country[]>;
+	states$: Observable<fromShared.State[]>;
+	cities$: Observable<fromShared.City[]>;
+
 	tabs: fromModels.Tabs = {
-		personal: true,
-		contact: false
+		personal: false,
+		contact: true
 	};
 
 	constructor(
@@ -42,6 +46,8 @@ export class ContactFormComponent implements OnInit {
 			this._contact.getEmployees(),
 			this._contact.getCompanies()
 		]).pipe(share());
+
+		this.countries$ = this._store.getCountries();
 	}
 
 	handleTabs(event, form?): void {
@@ -55,5 +61,13 @@ export class ContactFormComponent implements OnInit {
 		};
 
 		this.tabs[form.name] = true;
+	}
+
+	handleToggle(event): void {
+		if (event.type === "country") {
+			this.states$ = this._store.getStates(event.value);
+		} else if (event.type === "states") {
+			this.cities$ = this._store.getCities(event.value);
+		}
 	}
 }

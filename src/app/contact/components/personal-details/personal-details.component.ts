@@ -51,18 +51,19 @@ export class PersonalDetailsComponent implements OnInit {
 			Con_Type: new FormControl("", [Validators.required]),
 			Con_DOB: new FormControl(""),
 			Con_Ann_Date: new FormControl(""),
-			Con_Company_Id: new FormControl("", [Validators.required]),
-			Con_Designation: new FormControl("", [Validators.required]),
-			Con_Department: new FormControl("", [Validators.required]),
+			Con_Company_Id: new FormControl("", []),
+			Con_Designation: new FormControl("", []),
+			Con_Department: new FormControl("", []),
 			Con_Linkedin: new FormControl(""),
 			Con_Twitter: new FormControl(""),
-			Con_Fb: new FormControl("")
+			Con_Fb: new FormControl(""),
+			Con_SkypeId: new FormControl("")
 		});
 
 		this.personalForm.get("Con_Company_Id").valueChanges.subscribe(val => {
 			if (typeof val === "object") {
 				this.personalForm.patchValue({
-					Con_Department: val.BM_Department
+					Con_Department: "val.BM_Department"
 				});
 			}
 		});

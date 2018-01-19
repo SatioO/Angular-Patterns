@@ -4,7 +4,7 @@ import { RouterModule, Routes } from "@angular/router";
 import * as fromGuards from "../shared";
 
 const ROUTES: Routes = [
-	{ path: "", pathMatch: "full", redirectTo: "login" },
+	{ path: "", pathMatch: "full", redirectTo: "home" },
 	{
 		path: "home",
 		loadChildren: "../home/home.module#HomeModule",
