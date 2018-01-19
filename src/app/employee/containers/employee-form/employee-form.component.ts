@@ -96,6 +96,7 @@ export class EmployeeFormComponent implements OnInit {
 		for (let i in this.payload) {
 			final = { ...final, ...this.payload[i] };
 		}
+		console.log(final);
 
 		this._employee
 			.saveEmployees(final)

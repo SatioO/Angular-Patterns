@@ -1,0 +1,18 @@
+<div class="contact-box">
+    <a href="" [routerLink]="[contact.Emp_ID]">
+        <div class="col-sm-8">
+            <h3>
+                <strong>{{contact.Con_Name}} {{contact.Con_Surname}}</strong>
+            </h3>
+            <address>
+                <strong>{{contact.Con_Email1}}</strong>
+                <br />
+                <br> {{contact.Con_Address | slice:0:28 }} ...
+                <br>
+                <abbr title="Phone">P:</abbr> ({{contact.Con_MCode}}) {{contact.Con_Phone}}
+
+            </address>
+        </div>
+        <div class="clearfix"></div>
+    </a>
+</div>

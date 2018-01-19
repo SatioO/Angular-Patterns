@@ -1,5 +1,6 @@
 import {
 	Component,
+	OnInit,
 	Input,
 	ChangeDetectionStrategy,
 	EventEmitter,
@@ -15,27 +16,29 @@ import {
 // store
 import * as fromStore from "../../../shared";
 
+//models
+import * as fromModels from "../../models";
+
 @Component({
 	selector: "document-details",
 	templateUrl: "./document-details.component.html",
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DocumentDetailsComponent {
+export class DocumentDetailsComponent implements OnInit {
 	@Input() store: { [key: string]: fromStore.Store[] };
 	@Input() view: boolean;
+	@Input() data: { [key: string]: fromModels.Business[] };
 
-	@Output()
-	tabs: EventEmitter<{ name: string; status: string }> = new EventEmitter<{
-		name: string;
-		status: string;
-	}>();
+	@Output() tabs = new EventEmitter<any>();
 
 	@Output() toggle: EventEmitter<any> = new EventEmitter<any>();
 
 	documentForm: FormGroup;
 	selectedFile: string;
 
-	constructor(private _fb: FormBuilder) {
+	constructor(private _fb: FormBuilder) {}
+
+	ngOnInit(): void {
 		this.documentForm = this._fb.group({
 			Doc_Pan: new FormControl("", [Validators.required]),
 			Doc_Gst: new FormControl("", [Validators.required]),
@@ -44,11 +47,22 @@ export class DocumentDetailsComponent {
 			Doc_Pic_Upload: new FormControl("", [Validators.required]),
 			Doc_Name: new FormControl("", [Validators.required])
 		});
+
+		if (!!this.data) {
+			this.documentForm.patchValue({
+				Doc_Pan: this.data.Doc_Pan,
+				Doc_Gst: this.data.Doc_Gst,
+				Doc_Cst: this.data.Doc_Cst,
+				Doc_Vat: this.data.Doc_Vat,
+				Doc_Pic_Upload: this.data.Doc_Pic_Upload,
+				Doc_Name: this.data.Doc_Name
+			});
+		}
 	}
 
 	onFileChange($event) {
 		let file = $event.target.files[0];
-		this.selectedFile = file.name;
+		this.selectedFile = file;
 		this.documentForm.controls["Doc_Pic_Upload"].setValue(
 			file ? file.name : ""
 		);
@@ -57,7 +71,10 @@ export class DocumentDetailsComponent {
 	handleTabs(name, status?) {
 		this.tabs.emit({
 			name: name,
-			status: !!status ? status : this.documentForm.status
+			status: !!status ? status : this.documentForm.status,
+			values: this.documentForm.value,
+			additional: { file: this.selectedFile },
+			back: !!status ? true : false
 		});
 	}
 }

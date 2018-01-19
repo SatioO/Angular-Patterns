@@ -64,7 +64,7 @@ export class ContactFormComponent implements OnInit {
 			this.payload[form.name] = form.values;
 
 			if (!!form.submit) {
-				console.log(this.payload);
+				this.handleSubmit();
 			}
 		}
 
@@ -82,5 +82,17 @@ export class ContactFormComponent implements OnInit {
 		} else if (event.type === "states") {
 			this.cities$ = this._store.getCities(event.value);
 		}
+	}
+
+	handleSubmit() {
+		let final = {};
+		for (let i in this.payload) {
+			final = { ...final, ...this.payload[i] };
+		}
+		console.log(final);
+
+		this._contact
+			.create(final)
+			.subscribe(data => console.log(data), error => console.log(error));
 	}
 }

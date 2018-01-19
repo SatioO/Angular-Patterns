@@ -1,6 +1,7 @@
 import {
 	Component,
 	Input,
+	OnInit,
 	ChangeDetectionStrategy,
 	EventEmitter,
 	Output
@@ -12,8 +13,9 @@ import {
 	Validators
 } from "@angular/forms";
 
+import * as fromShared from "../../../shared/models";
 // models
-import { Country, City, State } from "../../models";
+import * as fromModels from "../../models";
 
 // store
 import * as fromStore from "../../../shared";
@@ -23,24 +25,23 @@ import * as fromStore from "../../../shared";
 	templateUrl: "./contact-details.component.html",
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ContactDetailsComponent {
+export class ContactDetailsComponent implements OnInit {
 	@Input() store: { [key: string]: fromStore.Store[] };
+	@Input() data: { [key: string]: fromModels.Business[] };
 	@Input() view: boolean;
-	@Input() countries: Country[];
-	@Input() cities: City[];
-	@Input() states: State[];
+	@Input() countries: fromShared.Country[];
+	@Input() cities: fromShared.City[];
+	@Input() states: fromShared.State[];
 
-	@Output()
-	tabs: EventEmitter<{ name: string; status: string }> = new EventEmitter<{
-		name: string;
-		status: string;
-	}>();
+	@Output() tabs: EventEmitter<any> = new EventEmitter<any>();
 
 	@Output() toggle: EventEmitter<any> = new EventEmitter<any>();
 
 	contactForm: FormGroup;
 
-	constructor(private _fb: FormBuilder) {
+	constructor(private _fb: FormBuilder) {}
+
+	ngOnInit(): void {
 		this.contactForm = this._fb.group({
 			Con_Add1: new FormControl("", [
 				Validators.required,
@@ -92,6 +93,27 @@ export class ContactDetailsComponent {
 				Validators.maxLength(8)
 			])
 		});
+
+		if (!!this.data) {
+			this.contactForm.patchValue({
+				Con_Add1: this.data.Con_Add1,
+				Con_Country: this.data.Con_Country,
+				Con_State: this.data.Con_State,
+				Con_City: this.data.Con_City,
+				Con_Pincode: this.data.Con_Pincode,
+				Con_CCode: this.data.Con_CCode,
+				Con_Phone: this.data.Con_Phone,
+				Con_MCode: this.data.Con_MCode,
+				Con_Mobile: this.data.Con_Mobile,
+				Con_AMCode: this.data.Con_AMCode,
+				Con_AMobile: this.data.Con_AMobile,
+				Con_Add2: this.data.Con_Add2,
+				Con_Country2: this.data.Con_Country2,
+				Con_State2: this.data.Con_State2,
+				Con_City2: this.data.Con_City2,
+				Con_Pincode2: this.data.Con_Pincode2
+			});
+		}
 	}
 
 	OnCopyFields(event: MouseEvent): void {
@@ -124,8 +146,11 @@ export class ContactDetailsComponent {
 	handleTabs(name, status?) {
 		this.tabs.emit({
 			name: name,
-			status: !!status ? status : this.contactForm.status
+			status: !!status ? status : this.contactForm.status,
+			values: this.contactForm.value,
+			additional: null,
+			submit: true,
+			back: !!status ? true : false
 		});
 	}
-	handleSubmit() {}
 }

@@ -87,7 +87,7 @@
                 <input type="number" [attr.disabled]="view ? '' : null" class="form-control" placeholder="Pincode" formControlName="Con_Pincode2">
             </div>
         </div>
-        <button type="submit" (click)="handleSubmit()" [disabled]="contactForm.status !== 'VALID'" class="btn btn-success">Submit</button>
-        <input type="button" (click)="handleTabs('bankdetails', 'VALID')" value="back" class="btn btn-danger" />
+        <button type="submit" (click)="handleTabs('final')" *ngIf="!view" [disabled]="contactForm.status !== 'VALID'" class="btn btn-success">Submit</button>
+        <input type="button" (click)="handleTabs('bankdetails', 'VALID')" *ngIf="!view" value="back" class="btn btn-danger" />
     </div>
 </form>

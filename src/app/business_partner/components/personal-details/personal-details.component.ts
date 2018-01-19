@@ -1,6 +1,7 @@
 import {
 	Component,
 	Input,
+	OnInit,
 	OnChanges,
 	ChangeDetectionStrategy,
 	EventEmitter,
@@ -15,6 +16,10 @@ import {
 
 // store
 import * as fromStore from "../../../shared";
+
+//models
+import * as fromModels from "../../models";
+
 import { FormArray } from "@angular/forms/src/model";
 
 @Component({
@@ -22,9 +27,10 @@ import { FormArray } from "@angular/forms/src/model";
 	templateUrl: "./personal-details.component.html",
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PersonalDetailsComponent implements OnChanges {
+export class PersonalDetailsComponent implements OnInit, OnChanges {
 	@Input() store: { [key: string]: fromStore.Store[] };
 	@Input() view: boolean;
+	@Input() data: { [key: string]: fromModels.Business[] };
 	@Output() tabs = new EventEmitter<any>();
 
 	businesspartnerForm: FormGroup;
@@ -34,7 +40,9 @@ export class PersonalDetailsComponent implements OnChanges {
 	industry: fromStore.Store[];
 	entitytype: fromStore.Store[];
 
-	constructor(private _fb: FormBuilder) {
+	constructor(private _fb: FormBuilder) {}
+
+	ngOnInit(): void {
 		this.businesspartnerForm = this._fb.group({
 			Comp_Name: new FormControl("", [Validators.required]),
 			Comp_Dire1: new FormControl("", [Validators.required]),
@@ -63,6 +71,24 @@ export class PersonalDetailsComponent implements OnChanges {
 				Validators.pattern(this.urlpattern)
 			])
 		});
+
+		if (!!this.data) {
+			this.businesspartnerForm.patchValue({
+				Comp_Name: this.data.Comp_Name,
+				Comp_Dire1: this.data.Comp_Dire1,
+				Comp_Dire2: this.data.Comp_Dire2,
+				Comp_Web: this.data.Comp_Web,
+				Comp_Email1: this.data.Comp_Email1,
+				Comp_Email2: this.data.Comp_Email2,
+				Comp_Dept: this.data.Comp_Dept,
+				Comp_Indu: this.data.Comp_Indu,
+				Comp_Enti: this.data.Comp_Enti,
+				Comp_Face: this.data.Comp_Face,
+				Comp_Link: this.data.Comp_Link,
+				Comp_Twit: this.data.Comp_Twit,
+				Comp_Skyp: this.data.Comp_Skyp
+			});
+		}
 	}
 
 	ngOnChanges(changes) {
@@ -74,6 +100,10 @@ export class PersonalDetailsComponent implements OnChanges {
 	}
 
 	handleTabs(name) {
-		this.tabs.emit({ name: name, status: this.businesspartnerForm.status });
+		this.tabs.emit({
+			name: name,
+			status: this.businesspartnerForm.status,
+			values: this.businesspartnerForm.value
+		});
 	}
 }

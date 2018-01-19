@@ -1,9 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import {
+	Component,
+	OnInit,
+	ChangeDetectionStrategy,
+	Input
+} from "@angular/core";
 
 import { Observable } from "rxjs/Observable";
 import { share } from "rxjs/operators";
 
-// store
+// shared
 import * as fromShared from "../../../shared";
 // services
 import * as fromServices from "../../services";
@@ -16,13 +21,14 @@ import * as fromModels from "../../models";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BusinessPartnerFormComponent implements OnInit {
+	@Input() data: { [key: string]: string };
+	@Input() viewmode: boolean = false;
+
 	store$: Observable<{ [key: string]: fromShared.Store[] }>;
 
 	countries$: Observable<fromModels.Country[]>;
 	states$: Observable<fromModels.State[]>;
 	cities$: Observable<fromModels.City[]>;
-
-	viewmode: boolean = false;
 
 	tabs: fromModels.Tabs = {
 		personaldetais: true,
@@ -30,6 +36,8 @@ export class BusinessPartnerFormComponent implements OnInit {
 		bankdetails: false,
 		contactdetails: false
 	};
+
+	payload: { [key: string]: object } = {};
 
 	constructor(
 		private _store: fromShared.StoreService,
@@ -49,8 +57,7 @@ export class BusinessPartnerFormComponent implements OnInit {
 		if (!!event) {
 			event.preventDefault();
 		}
-
-		if (form.status !== "VALID") {
+		if (!this.viewmode && form.status !== "VALID") {
 			return;
 		}
 
@@ -61,6 +68,14 @@ export class BusinessPartnerFormComponent implements OnInit {
 			contactdetails: false
 		};
 
+		if (!form.back) {
+			this.payload[form.name] = form.values;
+
+			if (!!form.submit) {
+				this.handleSubmit();
+			}
+		}
+
 		this.tabs[form.name] = true;
 	}
 
@@ -70,5 +85,20 @@ export class BusinessPartnerFormComponent implements OnInit {
 		} else if (event.type === "states") {
 			this.cities$ = this._business_partner.getCities(event.value);
 		}
+	}
+	handleSubmit() {
+		let final = {};
+		for (let i in this.payload) {
+			final = { ...final, ...this.payload[i] };
+		}
+		console.log(final);
+
+		// this._business_partner
+		// 	.saveEmployees(final)
+		// 	.subscribe(data => console.log(data), error => console.log(error));
+	}
+
+	handleEdit() {
+		this.viewmode = false;
 	}
 }
