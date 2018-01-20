@@ -27,7 +27,7 @@ export class ContactViewComponent implements OnInit {
 
 	handleSearch(value: string): void {
 		this.contacts$ = this._contacts
-			.getSearchResults(value)
+			.search(value)
 			.pipe(
 				map((entities: { [key: number]: fromModels.Contact }) =>
 					Object.keys(entities).map(id => entities[id])

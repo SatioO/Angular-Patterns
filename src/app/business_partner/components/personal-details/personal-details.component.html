@@ -2,26 +2,26 @@
     <div class="form-group row client-detail">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="form-group row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="col-sm-3">
                     <label>Company Name</label>
-                    <input type="text" class="form-control" placeholder="Company Name" [attr.disabled]="view ? '' : null" formControlName="Comp_Name"> </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <label>Name - Director 1</label>
-                    <input type="text" class="form-control" placeholder="Director Full Name" [attr.disabled]="view ? '' : null" formControlName="Comp_Dire1"> </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <label>Name - Director 2</label>
-                    <input type="text" class="form-control" placeholder="Director Full Name" [attr.disabled]="view ? '' : null" formControlName="Comp_Dire2"> </div>
-            </div>
-            <div class="form-group row">
+                    <input type="text" class="form-control" placeholder="Company Name" [attr.disabled]="view ? '' : null" formControlName="Comp_Name">
+                </div>
                 <div class="col-sm-3">
                     <label>Company Website</label>
                     <input type="text" class="form-control" placeholder="Company Website" [attr.disabled]="view ? '' : null" formControlName="Comp_Web">
                 </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <label>Name - Director 1</label>
+                    <input type="text" class="form-control" placeholder="Director Full Name" [attr.disabled]="view ? '' : null" formControlName="Comp_Dire1">
+                </div>
+                <div class="col-sm-3">
+                    <label>Name - Director 2</label>
+                    <input type="text" class="form-control" placeholder="Director Full Name" [attr.disabled]="view ? '' : null" formControlName="Comp_Dire2">
+                </div>
+            </div>
+            <div class="form-group row">
                 <div class="col-sm-3">
                     <label>Email Address</label>
                     <input type="email" class="form-control" placeholder="Email Address" [attr.disabled]="view ? '' : null" formControlName="Comp_Email1">

@@ -1,3 +1,4 @@
+// services
 import { StoreService } from "./store.service";
 
 export const services: any[] = [StoreService];
@@ -14,3 +15,4 @@ export const INDUSTRY = "INDUSTRY";
 export const DEPARTMENT = "DEPARTMENT";
 
 export * from "./store.service";
+export * from "./auth-interceptor.service";

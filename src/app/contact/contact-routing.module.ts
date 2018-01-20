@@ -15,8 +15,18 @@ const ROUTES: Routes = [
 	},
 	{
 		path: "view",
-		canActivate: [fromGuards.ContactExistsGuards],
-		component: fromContainers.ContactViewComponent
+		children: [
+			{
+				path: "",
+				component: fromContainers.ContactViewComponent,
+				canActivate: [fromGuards.ContactExistsGuards]
+			},
+			{
+				path: ":id",
+				component: fromContainers.ContactDetailComponent,
+				canActivate: [fromGuards.ContactExistsGuards]
+			}
+		]
 	}
 ];
 

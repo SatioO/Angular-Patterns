@@ -36,9 +36,9 @@ export class PersonalDetailsComponent implements OnChanges {
 
 	constructor(private _fb: FormBuilder) {
 		this.businesspartnerForm = this._fb.group({
-			Comp_Name: new FormControl("", [Validators.required]),
-			Comp_Dire1: new FormControl("", [Validators.required]),
-			Comp_Dire2: new FormControl("", [Validators.required]),
+			BM_Company_Name: new FormControl("", [Validators.required]),
+			BM_Director1: new FormControl("", []),
+			Comp_Dire2: new FormControl("", []),
 			Comp_Web: new FormControl("", [Validators.required]),
 			Comp_Email1: new FormControl("", [
 				Validators.required,

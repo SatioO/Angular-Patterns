@@ -20,6 +20,10 @@ export class StoreService {
 		return !!localStorage.getItem("user");
 	}
 
+	getUser() {
+		return JSON.parse(localStorage.getItem("user"));
+	}
+
 	getCountries(): Observable<fromModels.Country[]> {
 		return this._http.get<fromModels.Country[]>(
 			`${environment.baseUrl}/store/countries`
@@ -48,7 +52,7 @@ export class StoreService {
 		}
 	}
 
-	format(item, args) {
+	private format(item, args) {
 		const model: { [key: string]: fromModels.Store[] } = {};
 
 		args.forEach(key => {

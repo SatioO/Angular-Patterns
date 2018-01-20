@@ -1,5 +1,5 @@
-import { BusinessPartnerFormComponent } from "./business_partner-form/business_partner-form";
+import { BusinessPartnerFormComponent } from "./business-partner-form/business-partner-form.component";
 
 export const containers: any[] = [BusinessPartnerFormComponent];
 
-export * from "./business_partner-form/business_partner-form";
+export * from "./business-partner-form/business-partner-form.component";

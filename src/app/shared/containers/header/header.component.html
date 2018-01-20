@@ -1,11 +1,16 @@
 <div class="row border-bottom white-bg">
   <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
-      <span *ngIf="isLoggedIn" minimiza-sidebar>
+      <span minimiza-sidebar>
         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary ">
           <i class="fa fa-bars"></i>
         </a>
       </span>
+      <div class="navbar-form-custom" style="width: 290px;">
+        <span class="text-muted welcome-message">
+          <h3 style="line-height: 2.9em; margin-left:10px;">Thakrar Infotech</h3>
+        </span>
+      </div>
     </div>
     <ul class="nav navbar-top-links navbar-right pull-right">
       <li *ngIf="!isLoggedIn">

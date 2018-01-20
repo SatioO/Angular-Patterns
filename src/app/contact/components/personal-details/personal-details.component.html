@@ -11,7 +11,7 @@
             </div>
             <div class="col-sm-3">
                 <label>Middle Name</label>
-                <input type="text" class="form-control" [attr.disabled]="view ? '': null" formControlName="Con_MName" placeholder="Middle Name">
+                <input type="text" class="form-control" [attr.disabled]="view ? '': null" formControlName="Con_Mname" placeholder="Middle Name">
             </div>
             <div class="col-sm-3">
                 <label>Last Name</label>
@@ -40,7 +40,8 @@
             <div class="col-sm-3 col-xs-12">
                 <label>Company name</label>
                 <input ng2-auto-complete formControlName="Con_Company_Id" [source]="companies" [list-formatter]="autocompleListFormatter"
-                    value-property-name="BM_No" display-property-name="BM_Company_Name" placeholder="Company name" class="form-control">
+                    value-property-name="BM_No" [attr.disabled]="view ? '': null" display-property-name="BM_Company_Name" placeholder="Company name"
+                    class="form-control">
             </div>
             <div class="col-sm-3 col-xs-12">
                 <label>Department</label>
@@ -53,8 +54,8 @@
             <div class="col-sm-3 col-xs-6">
                 <label>Contact owner</label>
 
-                <select class="form-control c-select" [attr.disabled]="view ? '': null" formControlName="Con_Type">
-                    <option *ngFor="let option of owners" [value]="option">{{option}}</option>
+                <select class="form-control c-select" [attr.disabled]="view ? '': null" formControlName="Con_Owner">
+                    <option *ngFor="let option of owners" [value]="option.emp_id">{{option.name}}</option>
                 </select>
             </div>
         </div>

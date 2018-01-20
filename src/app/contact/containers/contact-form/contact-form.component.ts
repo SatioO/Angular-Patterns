@@ -4,6 +4,7 @@ import {
 	ChangeDetectionStrategy,
 	Input
 } from "@angular/core";
+import { Router } from "@angular/router";
 
 // rxjs
 import { Observable } from "rxjs/Observable";
@@ -22,7 +23,8 @@ import * as fromServices from "../../services";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactFormComponent implements OnInit {
-	@Input() viewmode: boolean;
+	@Input() data: { [key: string]: string };
+	@Input() viewmode: boolean = false;
 
 	store$: Observable<{}>;
 
@@ -36,22 +38,29 @@ export class ContactFormComponent implements OnInit {
 	};
 
 	payload: { [key: string]: object } = {};
+	editmode: boolean = false;
 
 	constructor(
 		private _contact: fromServices.ContactService,
-		private _store: fromShared.StoreService
+		private _store: fromShared.StoreService,
+		private _router: Router
 	) {}
 
 	ngOnInit(): void {
 		this.store$ = forkJoin([
 			this._store.populate(fromShared.TITLE, fromShared.CONTACT_TYPE),
-			this._contact.getEmployees(),
-			this._contact.getCompanies(),
+			this._contact.employees(),
+			this._contact.companies(),
 			this._store.getCountries()
 		]).pipe(share());
+
+		if (!!this.data) {
+			this.states$ = this._store.getStates(this.data.Con_Country);
+			this.cities$ = this._store.getCities(this.data.Con_State);
+		}
 	}
 
-	handleTabs(event, form?): void {
+	public handleTabs(event, form?): void {
 		if (!!event) {
 			event.preventDefault();
 		}
@@ -62,9 +71,9 @@ export class ContactFormComponent implements OnInit {
 
 		if (!form.back) {
 			this.payload[form.name] = form.values;
-
 			if (!!form.submit) {
-				console.log(this.payload);
+				this.handleSubmit(this.payload);
+				this._contact.contacts = null;
 			}
 		}
 
@@ -76,11 +85,62 @@ export class ContactFormComponent implements OnInit {
 		this.tabs[form.name] = true;
 	}
 
-	handleToggle(event): void {
+	private handleToggle(event): void {
 		if (event.type === "country") {
 			this.states$ = this._store.getStates(event.value);
 		} else if (event.type === "states") {
 			this.cities$ = this._store.getCities(event.value);
 		}
+	}
+
+	private handleEdit() {
+		this.viewmode = false;
+		this.editmode = true;
+		this.tabs = {
+			personal: true,
+			contact: false
+		};
+	}
+
+	private handleSubmit(payload) {
+		let final = {};
+		for (let i in this.payload) {
+			final = { ...final, ...this.payload[i] };
+		}
+
+		if (final["Con_Company_Id"]) {
+			final["Con_Company_Id"] = final["Con_Company_Id"]["BM_No"];
+		}
+
+		final["Con_Status_Flag"] = "T";
+		final["CreatedBy"] = this._store.getUser()["Emp_ID"];
+		final["UpdatedBy"] = this._store.getUser()["Emp_ID"];
+
+		let form$: Observable<any>;
+
+		if (this.editmode) {
+			form$ = this._contact.update(final);
+		} else {
+			form$ = this._contact.create(final);
+		}
+
+		form$.subscribe(
+			data => {
+				alertify
+					.logPosition("bottom right")
+					.maxLogItems(1)
+					.success("Contact created successfully.");
+
+				this._router.navigate(["/contact/view"]);
+			},
+			error => {
+				alertify
+					.logPosition("bottom right")
+					.maxLogItems(1)
+					.error("Something Went Wrong!");
+
+				this._router.navigate(["/contact/view"]);
+			}
+		);
 	}
 }

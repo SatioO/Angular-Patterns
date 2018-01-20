@@ -17,11 +17,11 @@ export class ContactExistsGuards implements CanActivate {
 		return this.checkStore();
 	}
 
-	checkStore(): Observable<boolean> {
+	private checkStore(): Observable<boolean> {
 		if (!!this._contact.contacts) {
 			return of(true);
 		} else {
-			return this._contact.getContacts().pipe(
+			return this._contact.get().pipe(
 				map((contacts: fromModels.Contact[]) => {
 					this._contact.contacts = of(contacts);
 				}),

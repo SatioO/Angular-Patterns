@@ -1,16 +1,24 @@
-<div class="contact-box">
-    <div class="col-sm-8">
-        <h3>
+<div class="contact-box center-version">
+
+    <a href="" [routerLink]="[contact.Con_No]">
+        <h3 class="m-b-xs">
             <strong>{{contact.Con_Name}} {{contact.Con_Surname}}</strong>
         </h3>
-        <address>
-            <strong>{{contact.Con_Email1}}</strong>
-            <br />
-            <br> {{contact.Con_Address | slice:0:28 }} ...
-            <br>
-            <abbr title="Phone">P:</abbr> ({{contact.Con_MCode}}) {{contact.Con_Phone}}
 
+        <div class="font-bold">{{contact.Con_Designation}}</div>
+        <address class="m-t-md">
+            <strong>{{contact.Con_City}}, {{contact.Con_State}}</strong>
+            <br> {{contact.Con_Address}}
+            <abbr title="Phone">P:</abbr> ({{contact.Con_MCode}}) {{contact.Con_Mobile}}
         </address>
+    </a>
+    <div class="contact-box-footer">
+        <div class="m-t-xs btn-group">
+            <a href="tel:{{contact.Con_MCode}}{{contact.Con_Mobile}}" class="btn btn-xs btn-white">
+                <i class="fa fa-phone"></i> Call </a>
+            <a href="mailto:{{contact.Con_Email1}}" class="btn btn-xs btn-white">
+                <i class="fa fa-envelope"></i> Email</a>
+        </div>
     </div>
-    <div class="clearfix"></div>
+
 </div>

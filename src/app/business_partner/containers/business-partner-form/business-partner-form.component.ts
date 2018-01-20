@@ -11,8 +11,8 @@ import * as fromServices from "../../services";
 import * as fromModels from "../../models";
 
 @Component({
-	selector: "business_partner-form",
-	templateUrl: "./business_partner-form.component.html",
+	selector: "business-partner-form",
+	templateUrl: "./business-partner-form.component.html",
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BusinessPartnerFormComponent implements OnInit {
@@ -25,10 +25,10 @@ export class BusinessPartnerFormComponent implements OnInit {
 	viewmode: boolean = false;
 
 	tabs: fromModels.Tabs = {
-		personaldetais: true,
-		documentdetails: false,
-		bankdetails: false,
-		contactdetails: false
+		personal: true,
+		document: false,
+		bank: false,
+		contact: false
 	};
 
 	constructor(
@@ -55,10 +55,10 @@ export class BusinessPartnerFormComponent implements OnInit {
 		}
 
 		this.tabs = {
-			personaldetais: false,
-			documentdetails: false,
-			bankdetails: false,
-			contactdetails: false
+			personal: false,
+			document: false,
+			bank: false,
+			contact: false
 		};
 
 		this.tabs[form.name] = true;
