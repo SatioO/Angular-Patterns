@@ -17,7 +17,15 @@ export class ContactService {
 	getContacts(): Observable<fromModels.Contact[]> {
 		return this._http
 			.get<fromModels.Contact[]>(`${environment.baseUrl}/contact`)
-			.pipe(map(employees => this.normalizeEntity(employees)));
+			.pipe(map(contacts => this.normalizeEntity(contacts)));
+	}
+
+	getSearchResults(query): Observable<fromModels.Contact[]> {
+		return this._http
+			.get<fromModels.Contact[]>(
+				`${environment.baseUrl}/contact/search?q=${query}`
+			)
+			.pipe(map(contacts => this.normalizeEntity(contacts)));
 	}
 
 	getCompanies(): Observable<fromModels.Company[]> {

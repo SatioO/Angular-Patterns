@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 
 // modules
 import { EmployeeRoutingModule } from "./employee-routing.module";
-import { SharedModule } from "../shared";
+import * as fromShared from "../shared";
 // containers
 import * as fromContainers from "./containers";
 // components
@@ -20,7 +20,7 @@ import * as fromGuards from "./guards";
 		CommonModule,
 		ReactiveFormsModule,
 		EmployeeRoutingModule,
-		SharedModule
+		fromShared.SharedModule
 	],
 	providers: [fromServices.EmployeeService, fromGuards.EmployeeExistsGuards],
 	exports: [...fromContainers.containers]
