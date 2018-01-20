@@ -2,7 +2,6 @@ import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { Router } from "@angular/router";
 
 // services
-import { ToastsManager } from "ng2-toastr/ng2-toastr";
 import * as fromServices from "../../services";
 
 @Component({

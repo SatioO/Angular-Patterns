@@ -8,10 +8,12 @@ import * as fromRoutes from "./contact-routing.module";
 import * as fromShared from "../shared";
 // containers
 import * as fromContainers from "./containers";
-// // components
+// components
 import * as fromComponents from "./components";
-// // services
+// services
 import * as fromServices from "./services";
+// guards
+import * as fromGuards from "./guards";
 
 @NgModule({
 	declarations: [...fromContainers.containers, ...fromComponents.components],
@@ -22,7 +24,7 @@ import * as fromServices from "./services";
 		fromRoutes.ContactRoutingModule,
 		fromShared.SharedModule
 	],
-	providers: [fromServices.ContactService],
+	providers: [...fromServices.services, ...fromGuards.guards],
 	exports: [...fromContainers.containers]
 })
 export class ContactModule {}

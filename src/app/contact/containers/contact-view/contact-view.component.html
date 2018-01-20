@@ -1,1 +1,9 @@
-Contact View
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row" *ngIf="contacts$ | async; let contacts; else loadingUserInfo">
+        <contact-card [contact]="contact" *ngFor="let contact of contacts" class="col-sm-6 col-md-4"></contact-card>
+    </div>
+</div>
+
+<ng-template #loadingUserInfo>
+    Loading contact information...
+</ng-template>

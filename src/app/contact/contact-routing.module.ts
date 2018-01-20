@@ -4,6 +4,8 @@ import { RouterModule, Routes } from "@angular/router";
 
 // containers
 import * as fromContainers from "./containers";
+// guards
+import * as fromGuards from "./guards";
 
 const ROUTES: Routes = [
 	{ path: "", pathMatch: "full", redirectTo: "view" },
@@ -13,6 +15,7 @@ const ROUTES: Routes = [
 	},
 	{
 		path: "view",
+		canActivate: [fromGuards.ContactExistsGuards],
 		component: fromContainers.ContactViewComponent
 	}
 ];

@@ -9,7 +9,27 @@ import { map } from "rxjs/operators";
 
 @Injectable()
 export class ContactService {
+	contacts: Observable<fromModels.Contact[]>;
+	contact: fromModels.Contact;
+
 	constructor(private _http: HttpClient) {}
+
+	getContacts(): Observable<fromModels.Contact[]> {
+		return this._http
+			.get<fromModels.Contact[]>(`${environment.baseUrl}/contact`)
+			.pipe(map(employees => this.normalizeEntity(employees)));
+	}
+
+	getCompanies(): Observable<fromModels.Company[]> {
+		const body = {
+			fields: "BM_No, BM_Company_Name, BM_Department"
+		};
+
+		return this._http.post<fromModels.Company[]>(
+			`${environment.baseUrl}/company/list`,
+			body
+		);
+	}
 
 	getEmployees(): Observable<Array<string>> {
 		return this._http
@@ -24,14 +44,22 @@ export class ContactService {
 			);
 	}
 
-	getCompanies(): Observable<fromModels.Company[]> {
-		const body = {
-			fields: "BM_No, BM_Company_Name, BM_Department"
-		};
+	create(createcontact) {
+		return this._http.post(`${environment.baseUrl}/create`, createcontact);
+	}
 
-		return this._http.post<fromModels.Company[]>(
-			`${environment.baseUrl}/company/list`,
-			body
+	normalizeEntity(contacts) {
+		return contacts.reduce(
+			(
+				entities: { [id: number]: fromModels.Contact },
+				contact: fromModels.Contact
+			) => {
+				return {
+					...entities,
+					[contact.Con_No]: contact
+				};
+			},
+			{}
 		);
 	}
 }
