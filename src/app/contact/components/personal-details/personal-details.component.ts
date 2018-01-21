@@ -53,7 +53,7 @@ export class PersonalDetailsComponent implements OnInit {
 			Con_DOB: new FormControl(null),
 			Con_Ann_Date: new FormControl(null),
 			Con_Company_Id: new FormControl(null, []),
-			Con_Designation: new FormControl(null, []),
+			Con_Designation: new FormControl(null, [Validators.required]),
 			Con_Department: new FormControl(null, []),
 			Con_Owner: new FormControl(null, [Validators.required]),
 			Con_Linkedin: new FormControl(null),
@@ -110,8 +110,11 @@ export class PersonalDetailsComponent implements OnInit {
 	}
 
 	private extractDate(date) {
-		const currentDate = new Date(date);
-		return currentDate.toISOString().substring(0, 10);
+		if (!!date) {
+			const currentDate = new Date(date);
+			return currentDate.toISOString().substring(0, 10);
+		}
+		return date;
 	}
 
 	autocompleListFormatter = (data: fromModels.Company) => {

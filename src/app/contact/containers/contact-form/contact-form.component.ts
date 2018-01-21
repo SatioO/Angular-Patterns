@@ -4,7 +4,7 @@ import {
 	ChangeDetectionStrategy,
 	Input
 } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 // rxjs
 import { Observable } from "rxjs/Observable";
@@ -43,7 +43,8 @@ export class ContactFormComponent implements OnInit {
 	constructor(
 		private _contact: fromServices.ContactService,
 		private _store: fromShared.StoreService,
-		private _router: Router
+		private _router: Router,
+		private _activated: ActivatedRoute
 	) {}
 
 	ngOnInit(): void {
@@ -108,8 +109,13 @@ export class ContactFormComponent implements OnInit {
 			final = { ...final, ...this.payload[i] };
 		}
 
-		if (final["Con_Company_Id"]) {
+		if (
+			final["Con_Company_Id"] &&
+			typeof final["Con_Company_Id"] === "object"
+		) {
 			final["Con_Company_Id"] = final["Con_Company_Id"]["BM_No"];
+		} else {
+			final["Con_Company_Id"] = this.data["Con_Company_Id"];
 		}
 
 		final["Con_Status_Flag"] = "T";
@@ -119,6 +125,7 @@ export class ContactFormComponent implements OnInit {
 		let form$: Observable<any>;
 
 		if (this.editmode) {
+			final["Con_No"] = this._activated.snapshot.params.id;
 			form$ = this._contact.update(final);
 		} else {
 			form$ = this._contact.create(final);

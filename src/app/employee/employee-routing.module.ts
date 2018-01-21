@@ -15,15 +15,17 @@ const ROUTES: Routes = [
 	},
 	{
 		path: "view",
-		canActivate: [fromGuards.EmployeeExistsGuards],
+
 		children: [
 			{
 				path: "",
-				component: fromContainers.EmployeeViewComponent
+				component: fromContainers.EmployeeViewComponent,
+				canActivate: [fromGuards.EmployeeExistsGuards]
 			},
 			{
 				path: ":id",
-				component: fromContainers.EmployeeDetailComponent
+				component: fromContainers.EmployeeDetailComponent,
+				canActivate: [fromGuards.EmployeeExistsGuards]
 			}
 		]
 	}

@@ -17,7 +17,7 @@
     <div class="tab-content" *ngIf="store$ | async; let store;">
       <div id="tab-1" class="tab-pane" [class.active]="tabs.personal === true">
         <div class="panel-body">
-          <personal-details [store]="store" [data]="data" [view]="viewmode" (tabs)="handleTabs(null, $event)"></personal-details>
+          <personal-details [store]="store" [data]="data" [view]="viewmode" (file)="handleFile($event)" (tabs)="handleTabs(null, $event)"></personal-details>
         </div>
       </div>
       <div id="tab-2" class="tab-pane" [class.active]="tabs.contact === true">

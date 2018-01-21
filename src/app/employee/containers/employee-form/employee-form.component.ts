@@ -4,10 +4,11 @@ import {
 	ChangeDetectionStrategy,
 	Input
 } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
 
+// rxjs
 import { Observable } from "rxjs/Observable";
 import { share } from "rxjs/operators";
-
 // shared
 import * as fromShared from "../../../shared";
 // services
@@ -38,10 +39,14 @@ export class EmployeeFormComponent implements OnInit {
 	};
 
 	payload: { [key: string]: object } = {};
+	final_payload = { employee: null, photos: null };
+	editmode: boolean = false;
 
 	constructor(
 		private _store: fromShared.StoreService,
-		private _employee: fromServices.EmployeeService
+		private _employee: fromServices.EmployeeService,
+		private _router: Router,
+		private _activated: ActivatedRoute
 	) {}
 
 	ngOnInit(): void {
@@ -54,6 +59,11 @@ export class EmployeeFormComponent implements OnInit {
 		);
 
 		this.countries$ = this._store.getCountries();
+
+		if (!!this.data) {
+			this.states$ = this._store.getStates(this.data.Emp_Country);
+			this.cities$ = this._store.getCities(this.data.Emp_State);
+		}
 	}
 
 	handleTabs(event, form): void {
@@ -77,6 +87,7 @@ export class EmployeeFormComponent implements OnInit {
 
 			if (!!form.submit) {
 				this.handleSubmit();
+				this._employee.employees = null;
 			}
 		}
 
@@ -91,18 +102,119 @@ export class EmployeeFormComponent implements OnInit {
 		}
 	}
 
+	handleFile($event) {
+		const formData = new FormData();
+		formData.append("photos", $event, $event.name);
+		this.final_payload.photos = formData;
+	}
+
 	handleSubmit() {
 		let final = {};
+
 		for (let i in this.payload) {
 			final = { ...final, ...this.payload[i] };
 		}
 
-		this._employee
-			.saveEmployees(final)
-			.subscribe(data => console.log(data), error => console.log(error));
+		final["Emp_ID"] = `EMP-${Math.random()
+			.toString()
+			.substring(0, 8)}`;
+		final["Emp_Status"] = "A";
+		final["UpdatedBy"] = this._store.getUser()["Emp_ID"];
+		final["Emp_Delete_Flag"] = "N";
+		if (this.editmode) {
+			final["Emp_ID"] = this._activated.snapshot.params.id;
+			this.final_payload.employee = final;
+			if (!!this.final_payload.photos) {
+				this._employee.upload(this.final_payload.photos).subscribe(
+					data => {
+						this._employee.update(this.final_payload).subscribe(
+							data => {
+								alertify
+									.logPosition("bottom right")
+									.maxLogItems(1)
+									.success("Employee created successfully.");
+
+								this._router.navigate(["/employee/view"]);
+							},
+							error => {
+								alertify
+									.logPosition("bottom right")
+									.maxLogItems(1)
+									.error("Something Went Wrong.");
+
+								this._router.navigate(["/employee/view"]);
+							}
+						);
+					},
+					error => {
+						alertify
+							.logPosition("bottom right")
+							.maxLogItems(1)
+							.success("Image uploading failed.");
+					}
+				);
+			} else {
+				this._employee.update(this.final_payload).subscribe(
+					data => {
+						alertify
+							.logPosition("bottom right")
+							.maxLogItems(1)
+							.success("Employee created successfully.");
+
+						this._router.navigate(["/employee/view"]);
+					},
+					error => {
+						alertify
+							.logPosition("bottom right")
+							.maxLogItems(1)
+							.error("Something Went Wrong.");
+
+						this._router.navigate(["/employee/view"]);
+					}
+				);
+			}
+		} else {
+			final["CreatedBy"] = this._store.getUser()["Emp_ID"];
+			this.final_payload.employee = final;
+			this._employee.upload(this.final_payload.photos).subscribe(
+				data => {
+					this._employee.saveEmployees(this.final_payload).subscribe(
+						data => {
+							alertify
+								.logPosition("bottom right")
+								.maxLogItems(1)
+								.success("Employee created successfully.");
+
+							this._router.navigate(["/employee/view"]);
+						},
+						error => {
+							alertify
+								.logPosition("bottom right")
+								.maxLogItems(1)
+								.error("Something Went Wrong.");
+
+							this._router.navigate(["/employee/view"]);
+						}
+					);
+				},
+				error => {
+					alertify
+						.logPosition("bottom right")
+						.maxLogItems(1)
+						.success("Image uploading failed.");
+				}
+			);
+		}
 	}
 
 	handleEdit() {
 		this.viewmode = false;
+		this.editmode = true;
+		this.tabs = {
+			personal: true,
+			contact: false,
+			family: false,
+			document: false
+		};
 	}
 }

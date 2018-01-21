@@ -9,6 +9,8 @@ export interface Contact {
 	Con_State: string;
 	Con_City: string;
 	Con_Pincode: number;
+	Con_State_Name: string;
+	Con_City_Name: string;
 	Con_CCode: number;
 	Con_Phone: number;
 	Con_MCode: number;

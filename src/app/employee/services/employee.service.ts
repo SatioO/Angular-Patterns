@@ -33,6 +33,17 @@ export class EmployeeService {
 		return this._http.post(`${environment.baseUrl}/employee`, employee);
 	}
 
+	update(employee) {
+		return this._http.put(`${environment.baseUrl}/employee`, employee);
+	}
+
+	upload(picture) {
+		return this._http.post(
+			`${environment.baseUrl}/employee/upload`,
+			picture
+		);
+	}
+
 	normalizeEntity(employees) {
 		return employees.reduce(
 			(

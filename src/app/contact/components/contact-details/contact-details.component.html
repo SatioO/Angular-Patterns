@@ -37,31 +37,32 @@
             </div>
             <div class="col-sm-3">
                 <label>Pincode</label>
-                <input type="number" class="form-control" placeholder="Pincode" [attr.disabled]="view ? '': null" formControlName="Con_Pincode">
+                <input type="text" pattern="\d*" maxlength="6" class="form-control" placeholder="Pincode" [attr.disabled]="view ? '': null"
+                    formControlName="Con_Pincode">
             </div>
         </div>
 
         <div class="form-group row">
             <div class="col-sm-3">
                 <label style="display:block;">Landline Number</label>
-                <input type="text" class="form-control" style="width:35%; display: inline-block" placeholder="Code" [attr.disabled]="view ? '': null"
-                    formControlName="Con_CCode">
-                <input type="number" class="form-control" style="width:calc(65% - 4px);display:inline-block;" placeholder="Phone Number"
-                    [attr.disabled]="view ? '': null" formControlName="Con_Phone">
+                <input type="text" pattern="\d*" maxlength="6" class="form-control" style="width:35%; display: inline-block" placeholder="Code"
+                    [attr.disabled]="view ? '': null" formControlName="Con_CCode">
+                <input type="text" pattern="\d*" maxlength="10" class="form-control" style="width:calc(65% - 4px);display:inline-block;"
+                    placeholder="Phone Number" [attr.disabled]="view ? '': null" formControlName="Con_Phone">
             </div>
             <div class="col-sm-3">
                 <label style="display:block;">Mobile Number</label>
-                <input type="text" class="form-control" style="width:35%; display: inline-block" placeholder="Code" readonly="" [attr.disabled]="view ? '': null"
-                    formControlName="Con_MCode">
-                <input type="number" class="form-control" style="width:calc(65% - 4px);display:inline-block;" placeholder="Mobile Number"
-                    [attr.disabled]="view ? '': null" formControlName="Con_Mobile">
+                <input type="text" pattern="\d*" maxlength="6" class="form-control" style="width:35%; display: inline-block" placeholder="Code"
+                    readonly="" [attr.disabled]="view ? '': null" formControlName="Con_MCode">
+                <input type="text" pattern="\d*" maxlength="10" class="form-control" style="width:calc(65% - 4px);display:inline-block;"
+                    placeholder="Mobile Number" [attr.disabled]="view ? '': null" formControlName="Con_Mobile">
             </div>
             <div class="col-sm-3">
                 <label style="display:block;">Alternate Number</label>
-                <input type="text" class="form-control" style="width:35%; display: inline-block" placeholder="Code" readonly="" [attr.disabled]="view ? '': null"
-                    formControlName="Con_AMCode">
-                <input type="number" class="form-control" style="width:calc(65% - 4px);display:inline-block;" placeholder="Mobile Number"
-                    [attr.disabled]="view ? '': null" formControlName="Con_AMobile">
+                <input type="text" pattern="\d*" maxlength="6" class="form-control" style="width:35%; display: inline-block" placeholder="Code"
+                    readonly="" [attr.disabled]="view ? '': null" formControlName="Con_AMCode">
+                <input type="text" pattern="\d*" maxlength="10" class="form-control" style="width:calc(65% - 4px);display:inline-block;"
+                    placeholder="Mobile Number" [attr.disabled]="view ? '': null" formControlName="Con_AMobile">
             </div>
         </div>
 

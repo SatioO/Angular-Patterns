@@ -17,6 +17,8 @@ import {
 // models
 import * as fromShared from "../../../shared/models";
 import * as fromModels from "../../models";
+// services
+import * as fromServices from "../../services";
 
 @Component({
 	selector: "contact-details",
@@ -40,54 +42,45 @@ export class ContactDetailsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.contactForm = this._fb.group({
-			Emp_Add1: new FormControl("", [
+			Emp_Add1: new FormControl(null, [
 				Validators.required,
 				Validators.maxLength(50)
 			]),
-			Emp_Country: new FormControl("", [Validators.required]),
-			Emp_State: new FormControl("", [Validators.required]),
-			Emp_City: new FormControl("", [Validators.required]),
-			Emp_Pincode: new FormControl("", [
+			Emp_Country: new FormControl(null, [Validators.required]),
+			Emp_State: new FormControl(null, [Validators.required]),
+			Emp_City: new FormControl(null, [Validators.required]),
+			Emp_Pincode: new FormControl(null, [
+				Validators.maxLength(6),
 				Validators.required,
-				Validators.pattern(/[0-9]*/),
-				Validators.minLength(2),
-				Validators.maxLength(8)
+				Validators.pattern(/[0-9]*/)
 			]),
-			Emp_CCode: new FormControl("", [
+			Emp_CCode: new FormControl(null, [
 				Validators.pattern(/[0-9]*/),
 				Validators.minLength(1),
 				Validators.maxLength(5)
 			]),
-			Emp_Phone: new FormControl("", [
-				Validators.minLength(4),
-				Validators.maxLength(12)
-			]),
-			Emp_MCode: new FormControl("", [
+			Emp_Phone: new FormControl(null, [Validators.maxLength(10)]),
+			Emp_MCode: new FormControl(null, [
 				Validators.required,
-				Validators.pattern(/[0-9]*/),
 				Validators.maxLength(5)
 			]),
-			Emp_Mobile: new FormControl("", [
+			Emp_Mobile: new FormControl(null, [
+				Validators.required,
+				Validators.maxLength(10)
+			]),
+			Emp_AMCode: new FormControl(null, [Validators.maxLength(5)]),
+			Emp_AMobile: new FormControl(null, [
+				Validators.pattern(/[0-9]*/),
+				Validators.maxLength(10)
+			]),
+			Emp_Add2: new FormControl(null, [Validators.maxLength(50)]),
+			Emp_Country2: new FormControl(null, [Validators.required]),
+			Emp_State2: new FormControl(null, [Validators.required]),
+			Emp_City2: new FormControl(null, [Validators.required]),
+			Emp_Pincode2: new FormControl(null, [
 				Validators.required,
 				Validators.pattern(/[0-9]*/),
-				Validators.minLength(10),
-				Validators.maxLength(12)
-			]),
-			Emp_AMCode: new FormControl("", [Validators.maxLength(5)]),
-			Emp_AMobile: new FormControl("", [
-				Validators.pattern(/[0-9]*/),
-				Validators.minLength(10),
-				Validators.maxLength(12)
-			]),
-			Emp_Add2: new FormControl("", [Validators.maxLength(50)]),
-			Emp_Country2: new FormControl("", [Validators.required]),
-			Emp_State2: new FormControl("", [Validators.required]),
-			Emp_City2: new FormControl("", [Validators.required]),
-			Emp_Pincode2: new FormControl("", [
-				Validators.required,
-				Validators.pattern(/[0-9]*/),
-				Validators.minLength(2),
-				Validators.maxLength(8)
+				Validators.maxLength(6)
 			])
 		});
 		if (!!this.data) {

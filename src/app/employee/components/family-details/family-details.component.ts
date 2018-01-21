@@ -39,58 +39,58 @@ export class FamilyDetailsComponent implements OnInit, OnChanges {
 
 	ngOnInit(): void {
 		this.familyForm = this._fb.group({
-			Emp_FC1_Name: new FormControl(""),
-			Emp_FC1_Relation: new FormControl(""),
-			Emp_FC1_Email: new FormControl("", [
+			Emp_FC1_Name: new FormControl(null),
+			Emp_FC1_Relation: new FormControl(null),
+			Emp_FC1_Email: new FormControl(null, [
 				Validators.pattern(/[^@]+@[^@]+\.[a-zA-Z]{2,6}/)
 			]),
-			Emp_FC2_Name: new FormControl(""),
-			Emp_FC2_Relation: new FormControl(""),
-			Emp_FC2_Email: new FormControl("", [
+			Emp_FC2_Name: new FormControl(null),
+			Emp_FC2_Relation: new FormControl(null),
+			Emp_FC2_Email: new FormControl(null, [
 				Validators.pattern(/[^@]+@[^@]+\.[a-zA-Z]{2,6}/)
 			]),
-			Emp_FC3_Name: new FormControl(""),
-			Emp_FC3_Relation: new FormControl(""),
-			Emp_FC3_Email: new FormControl("", [
+			Emp_FC3_Name: new FormControl(null),
+			Emp_FC3_Relation: new FormControl(null),
+			Emp_FC3_Email: new FormControl(null, [
 				Validators.pattern(/[^@]+@[^@]+\.[a-zA-Z]{2,6}/)
 			]),
-			Emp_FC4_Name: new FormControl(""),
-			Emp_FC4_Relation: new FormControl(""),
-			Emp_FC4_Email: new FormControl("", [
+			Emp_FC4_Name: new FormControl(null),
+			Emp_FC4_Relation: new FormControl(null),
+			Emp_FC4_Email: new FormControl(null, [
 				Validators.pattern(/[^@]+@[^@]+\.[a-zA-Z]{2,6}/)
 			]),
-			Emp_FC5_Name: new FormControl(""),
-			Emp_FC5_Relation: new FormControl(""),
-			Emp_FC5_Email: new FormControl("", [
+			Emp_FC5_Name: new FormControl(null),
+			Emp_FC5_Relation: new FormControl(null),
+			Emp_FC5_Email: new FormControl(null, [
 				Validators.pattern(/[^@]+@[^@]+\.[a-zA-Z]{2,6}/)
 			]),
-			Emp_FC6_Name: new FormControl(""),
-			Emp_FC6_Relation: new FormControl(""),
-			Emp_FC6_Email: new FormControl("", [
+			Emp_FC6_Name: new FormControl(null),
+			Emp_FC6_Relation: new FormControl(null),
+			Emp_FC6_Email: new FormControl(null, [
 				Validators.pattern(/[^@]+@[^@]+\.[a-zA-Z]{2,6}/)
 			]),
-			Emp_Ref1_Name: new FormControl("", [
+			Emp_Ref1_Name: new FormControl(null, [
 				Validators.minLength(2),
 				Validators.maxLength(50)
 			]),
-			Emp_Ref1_Company: new FormControl("", [
+			Emp_Ref1_Company: new FormControl(null, [
 				Validators.minLength(2),
 				Validators.maxLength(50)
 			]),
-			Emp_Ref1_Phone: new FormControl("", [
+			Emp_Ref1_Phone: new FormControl(null, [
 				Validators.pattern(/[0-9]*/),
 				Validators.minLength(2),
 				Validators.maxLength(12)
 			]),
-			Emp_Ref2_Name: new FormControl("", [
+			Emp_Ref2_Name: new FormControl(null, [
 				Validators.minLength(2),
 				Validators.maxLength(50)
 			]),
-			Emp_Ref2_Company: new FormControl("", [
+			Emp_Ref2_Company: new FormControl(null, [
 				Validators.minLength(2),
 				Validators.maxLength(50)
 			]),
-			Emp_Ref2_Phone: new FormControl("", [
+			Emp_Ref2_Phone: new FormControl(null, [
 				Validators.pattern(/[0-9]*/),
 				Validators.minLength(2),
 				Validators.maxLength(12)
@@ -127,8 +127,10 @@ export class FamilyDetailsComponent implements OnInit, OnChanges {
 		if (!!this.view && !!this.data) {
 			for (let i = 2; i <= 6; i++) {
 				if (
-					this.data[`Emp_FC${i}_Name`].length > 0 ||
-					this.data[`Emp_FC${i}_Email`].length > 0
+					(this.data[`Emp_FC${i}_Name`] &&
+						this.data[`Emp_FC${i}_Name`].length > 0) ||
+					(this.data[`Emp_FC${i}_Email`] &&
+						this.data[`Emp_FC${i}_Email`].length > 0)
 				) {
 					this.family = [...this.family, i];
 					this.currentIndex++;

@@ -13,11 +13,11 @@
     <div class="form-group row">
       <div class="col-sm-3">
         <label>Pan Card Number</label>
-        <input type="text" class="form-control" [attr.disabled]="view ? '': null" formControlName="Emp_PAN" placeholder="">
+        <input type="text" maxlength="10" class="form-control" [attr.disabled]="view ? '': null" formControlName="Emp_PAN" placeholder="">
       </div>
       <div class="col-sm-3">
         <label>Adhar Card Number</label>
-        <input type="number" class="form-control" [attr.disabled]="view ? '': null" formControlName="Emp_Adhar" placeholder="">
+        <input type="text" maxlength="12" class="form-control" [attr.disabled]="view ? '': null" formControlName="Emp_Adhar" placeholder="">
       </div>
       <div class="col-sm-3">
         <label>Passport Number</label>

@@ -19,6 +19,8 @@ import {
 import * as fromStore from "../../../shared";
 // models
 import * as fromModels from "../../models";
+// services
+import * as fromServices from "../../services";
 
 @Component({
 	selector: "personal-details",
@@ -30,6 +32,7 @@ export class PersonalDetailsComponent implements OnInit, OnChanges {
 	@Input() data: { [key: string]: fromModels.Employee };
 	@Input() view: boolean;
 	@Output() tabs = new EventEmitter<any>();
+	@Output() file = new EventEmitter<any>();
 
 	employeeForm: FormGroup;
 
@@ -45,30 +48,32 @@ export class PersonalDetailsComponent implements OnInit, OnChanges {
 
 	ngOnInit(): void {
 		this.employeeForm = this._fb.group({
-			Emp_Title: new FormControl("", [Validators.required]),
-			Emp_Name: new FormControl("", [Validators.required]),
-			Emp_MName: new FormControl("", []),
-			Emp_Surname: new FormControl("", [Validators.required]),
-			Emp_DOB: new FormControl("", [Validators.required]),
-			Emp_Gender: new FormControl("", [Validators.required]),
-			Emp_BloodG: new FormControl("", []),
-			Emp_Marital_Status: new FormControl("", [Validators.required]),
-			Emp_DOAnni: new FormControl("", []),
-			Emp_Email1: new FormControl("", [
+			Emp_Title: new FormControl(null, [Validators.required]),
+			Emp_Name: new FormControl(null, [Validators.required]),
+			Emp_MName: new FormControl(null, []),
+			Emp_Surname: new FormControl(null, [Validators.required]),
+			Emp_DOB: new FormControl(null, [Validators.required]),
+			Emp_Gender: new FormControl(null, [Validators.required]),
+			Emp_BloodG: new FormControl(null, []),
+			Emp_Marital_Status: new FormControl(null, [Validators.required]),
+			Emp_DOAnni: new FormControl(null, []),
+			Emp_Email1: new FormControl(null, [
 				Validators.required,
 				Validators.email
 			]),
-			Emp_Email2: new FormControl("", [
+			Emp_Email2: new FormControl(null, [
 				Validators.pattern(/[^@]+@[^@]+\.[a-zA-Z]{2,6}/)
 			]),
-			Emp_Linkedin: new FormControl("", [
+			Emp_Linkedin: new FormControl(null, [
 				Validators.pattern(this.urlpattern)
 			]),
-			Emp_Twitter: new FormControl("", [
+			Emp_Twitter: new FormControl(null, [
 				Validators.pattern(this.urlpattern)
 			]),
-			Emp_FB: new FormControl("", [Validators.pattern(this.urlpattern)]),
-			Emp_Pic_Upload: new FormControl("", [Validators.required])
+			Emp_FB: new FormControl(null, [
+				Validators.pattern(this.urlpattern)
+			]),
+			Emp_Pic_Upload: new FormControl(null, [Validators.required])
 		});
 
 		if (!!this.data) {
@@ -77,11 +82,11 @@ export class PersonalDetailsComponent implements OnInit, OnChanges {
 				Emp_Name: this.data.Emp_Name,
 				Emp_MName: this.data.Emp_MName,
 				Emp_Surname: this.data.Emp_Surname,
-				Emp_DOB: this.data.Emp_DOB,
+				Emp_DOB: this.extractDate(this.data.Emp_DOB),
 				Emp_Gender: this.data.Emp_Gender,
 				Emp_BloodG: this.data.Emp_BloodG,
 				Emp_Marital_Status: this.data.Emp_Marital_Status,
-				Emp_DOAnni: this.data.Emp_DOAnni,
+				Emp_DOAnni: this.extractDate(this.data.Emp_DOAnni),
 				Emp_Email1: this.data.Emp_Email1,
 				Emp_Email2: this.data.Emp_Email2,
 				Emp_Linkedin: this.data.Emp_Linkedin,
@@ -106,6 +111,9 @@ export class PersonalDetailsComponent implements OnInit, OnChanges {
 	onFileChange($event) {
 		let file = $event.target.files[0];
 		this.selectedFile = file;
+
+		this.file.emit(this.selectedFile);
+
 		this.employeeForm.controls["Emp_Pic_Upload"].setValue(
 			file ? file.name : ""
 		);
@@ -121,7 +129,15 @@ export class PersonalDetailsComponent implements OnInit, OnChanges {
 		}
 	}
 
-	handleTabs(name) {
+	private extractDate(date) {
+		if (!!date) {
+			const currentDate = new Date(date);
+			return currentDate.toISOString().substring(0, 10);
+		}
+		return date;
+	}
+
+	private handleTabs(name) {
 		this.tabs.emit({
 			name: name,
 			status: this.employeeForm.status,
