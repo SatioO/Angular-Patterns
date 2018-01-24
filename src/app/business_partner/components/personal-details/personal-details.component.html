@@ -4,50 +4,50 @@
             <div class="form-group row">
                 <div class="col-sm-3">
                     <label>Company Name</label>
-                    <input type="text" class="form-control" placeholder="Company Name" [attr.disabled]="view ? '' : null" formControlName="Comp_Name">
+                    <input type="text" class="form-control" placeholder="Company Name" [attr.disabled]="view ? '' : null" formControlName="BM_Company_Name">
                 </div>
                 <div class="col-sm-3">
                     <label>Company Website</label>
-                    <input type="text" class="form-control" placeholder="Company Website" [attr.disabled]="view ? '' : null" formControlName="Comp_Web">
+                    <input type="text" class="form-control" placeholder="Company Website" [attr.disabled]="view ? '' : null" formControlName="BM_Website">
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-3">
                     <label>Name - Director 1</label>
-                    <input type="text" class="form-control" placeholder="Director Full Name" [attr.disabled]="view ? '' : null" formControlName="Comp_Dire1">
+                    <input type="text" class="form-control" placeholder="Director Full Name" [attr.disabled]="view ? '' : null" formControlName="BM_Director1">
                 </div>
                 <div class="col-sm-3">
                     <label>Name - Director 2</label>
-                    <input type="text" class="form-control" placeholder="Director Full Name" [attr.disabled]="view ? '' : null" formControlName="Comp_Dire2">
+                    <input type="text" class="form-control" placeholder="Director Full Name" [attr.disabled]="view ? '' : null" formControlName="BM_Director2">
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-3">
                     <label>Email Address</label>
-                    <input type="email" class="form-control" placeholder="Email Address" [attr.disabled]="view ? '' : null" formControlName="Comp_Email1">
+                    <input type="email" class="form-control" placeholder="Email Address" [attr.disabled]="view ? '' : null" formControlName="BM_EmailId1">
                 </div>
                 <div class="col-sm-3">
                     <label>Alternate Email Address</label>
-                    <input type="email" class="form-control" placeholder="Email Address" [attr.disabled]="view ? '' : null" formControlName="Comp_Email2">
+                    <input type="email" class="form-control" placeholder="Email Address" [attr.disabled]="view ? '' : null" formControlName="BM_EmailId2">
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-3">
                     <label>Department</label>
-                    <select class="form-control" [attr.disabled]="view ? '' : null" formControlName="Comp_Dept">
-                        <option *ngFor="let dept of department" [selected]="dept.AttributeValue === Comp_Dept" [value]="dept.AttributeValue">{{dept.AttributeValue}}</option>
+                    <select class="form-control" [attr.disabled]="view ? '' : null" formControlName="BM_Department">
+                        <option *ngFor="let dept of department" [selected]="dept.AttributeValue === BM_Department" [value]="dept.AttributeValue">{{dept.AttributeValue}}</option>
                     </select>
                 </div>
                 <div class="col-sm-3">
                     <label>Industry</label>
-                    <select class="form-control" [attr.disabled]="view ? '' : null" formControlName="Comp_Indu">
+                    <select class="form-control" [attr.disabled]="view ? '' : null" formControlName="BM_IndustryType">
                         <option *ngFor="let industry of industry" [selected]="industry.AttributeValue === Comp_Indu" [value]="industry.AttributeValue">{{industry.AttributeValue}}</option>
                     </select>
                 </div>
                 <div class="col-sm-3">
                     <label>Entity Type</label>
-                    <select multiple="multiple" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Comp_Enti">
-                        <option *ngFor="let entitytype of entitytype" [selected]="entitytype.AttributeValue === Comp_Enti" [value]="entitytype.AttributeValue">{{entitytype.AttributeValue}}</option>
+                    <select multiple="multiple" class="form-control" [attr.disabled]="view ? '' : null" formControlName="BM_Entity_Type">
+                        <option *ngFor="let entitytype of entitytype" [selected]="entitytype.AttributeValue === BM_Entity_Type" [value]="entitytype.AttributeValue">{{entitytype.AttributeValue}}</option>
                     </select>
                 </div>
             </div>
@@ -55,20 +55,21 @@
             <div class="form-group row">
                 <div class="col-sm-3">
                     <label>Facebook Link</label>
-                    <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Comp_Face" placeholder="Facebook Link"> </div>
+                    <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="BM_Fb" placeholder="Facebook Link"> </div>
                 <div class="col-sm-3">
                     <label>LinkedIn Link</label>
-                    <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Comp_Link" placeholder="LinkedIn Link"> </div>
+                    <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="BM_Linkedin" placeholder="LinkedIn Link"> </div>
                 <div class="col-sm-3">
                     <label>Twitter Link</label>
-                    <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Comp_Twit" placeholder="Twitter Link"> </div>
+                    <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="BM_Twitter" placeholder="Twitter Link"> </div>
                 <div class="col-sm-3">
                     <label>Skype Id</label>
-                    <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Comp_Skyp" placeholder="Skype Id"> </div>
+                    <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="BM_SkypeId" placeholder="Skype Id"> </div>
             </div>
 
             <br />
-            <button type="submit" (click)="handleTabs('documentdetails')" [disabled]="businesspartnerForm.status !== 'VALID'" class="btn btn-success">Next</button>
+            <button type="submit" (click)="handleTabs('document')" *ngIf="!view" [disabled]="businesspartnerForm.status !== 'VALID'"
+                class="btn btn-success">Next</button>
         </div>
 
     </div>

@@ -1,9 +1,17 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import {
+	Component,
+	OnInit,
+	ChangeDetectionStrategy,
+	Input
+} from "@angular/core";
 
+import { Router, ActivatedRoute } from "@angular/router";
+
+//rxjs
 import { Observable } from "rxjs/Observable";
 import { share } from "rxjs/operators";
 
-// store
+// shared
 import * as fromShared from "../../../shared";
 // services
 import * as fromServices from "../../services";
@@ -16,13 +24,14 @@ import * as fromModels from "../../models";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BusinessPartnerFormComponent implements OnInit {
+	@Input() data: { [key: string]: string };
+	@Input() viewmode: boolean = false;
+
 	store$: Observable<{ [key: string]: fromShared.Store[] }>;
 
-	countries$: Observable<fromModels.Country[]>;
-	states$: Observable<fromModels.State[]>;
-	cities$: Observable<fromModels.City[]>;
-
-	viewmode: boolean = false;
+	countries$: Observable<fromShared.Country[]>;
+	states$: Observable<fromShared.State[]>;
+	cities$: Observable<fromShared.City[]>;
 
 	tabs: fromModels.Tabs = {
 		personal: true,
@@ -31,9 +40,15 @@ export class BusinessPartnerFormComponent implements OnInit {
 		contact: false
 	};
 
+	payload: { [key: string]: object } = {};
+	final_payload = { business: null, photos: null };
+	editmode: boolean = false;
+
 	constructor(
 		private _store: fromShared.StoreService,
-		private _business_partner: fromServices.Business_PartnerService
+		private _business_partner: fromServices.Business_PartnerService,
+		private _router: Router,
+		private _activated: ActivatedRoute
 	) {}
 
 	ngOnInit(): void {
@@ -43,6 +58,11 @@ export class BusinessPartnerFormComponent implements OnInit {
 			fromShared.DEPARTMENT
 		);
 		this.countries$ = this._business_partner.getCountries();
+
+		if (!!this.data) {
+			this.states$ = this._store.getStates(this.data.BM_Country);
+			this.cities$ = this._store.getCities(this.data.BM_State);
+		}
 	}
 
 	handleTabs(event, form): void {
@@ -50,7 +70,7 @@ export class BusinessPartnerFormComponent implements OnInit {
 			event.preventDefault();
 		}
 
-		if (form.status !== "VALID") {
+		if (!this.viewmode && form.status !== "VALID") {
 			return;
 		}
 
@@ -61,6 +81,15 @@ export class BusinessPartnerFormComponent implements OnInit {
 			contact: false
 		};
 
+		if (!form.back) {
+			this.payload[form.name] = form.values;
+
+			if (!!form.submit) {
+				this.handleSubmit();
+				this._business_partner.businessess = null;
+			}
+		}
+
 		this.tabs[form.name] = true;
 	}
 
@@ -70,5 +99,48 @@ export class BusinessPartnerFormComponent implements OnInit {
 		} else if (event.type === "states") {
 			this.cities$ = this._business_partner.getCities(event.value);
 		}
+	}
+
+	handleSubmit() {
+		let final = {};
+
+		for (let i in this.payload) {
+			final = { ...final, ...this.payload[i] };
+		}
+		// console.log(final);
+		final["CreatedBy"] = this._store.getUser()["Emp_ID"];
+		this.final_payload.business = final;
+		this._business_partner.upload(this.final_payload.photos).subscribe(
+			data => {
+				this._business_partner
+					.saveBusiness(this.final_payload)
+					.subscribe(
+						data => {
+							alertify
+								.logPosition("bottom right")
+								.maxLogItems(1)
+								.success(
+									"Business Partner created successfully."
+								);
+
+							this._router.navigate(["/business_partner/view"]);
+						},
+						error => {
+							alertify
+								.logPosition("bottom right")
+								.maxLogItems(1)
+								.error("Something Went Wrong.");
+
+							this._router.navigate(["/business_partner/view"]);
+						}
+					);
+			},
+			error => {
+				alertify
+					.logPosition("bottom right")
+					.maxLogItems(1)
+					.success("Image uploading failed.");
+			}
+		);
 	}
 }

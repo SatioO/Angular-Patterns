@@ -3,7 +3,8 @@ import {
 	Input,
 	ChangeDetectionStrategy,
 	EventEmitter,
-	Output
+	Output,
+	OnInit
 } from "@angular/core";
 import {
 	FormGroup,
@@ -12,44 +13,58 @@ import {
 	Validators
 } from "@angular/forms";
 
-// store
-import * as fromStore from "../../../shared";
+// models
+import * as fromShared from "../../../shared/models";
+import * as fromModels from "../../models";
+// services
+import * as fromServices from "../../services";
 
 @Component({
 	selector: "document-details",
 	templateUrl: "./document-details.component.html",
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DocumentDetailsComponent {
-	@Input() store: { [key: string]: fromStore.Store[] };
+export class DocumentDetailsComponent implements OnInit {
+	@Input() store: { [key: string]: fromShared.Store[] };
+	@Input() data: { [key: string]: fromModels.Business };
 	@Input() view: boolean;
 
-	@Output()
-	tabs: EventEmitter<{ name: string; status: string }> = new EventEmitter<{
-		name: string;
-		status: string;
-	}>();
-
+	@Output() tabs: EventEmitter<any> = new EventEmitter<any>();
 	@Output() toggle: EventEmitter<any> = new EventEmitter<any>();
+	@Output() file = new EventEmitter<any>();
 
 	documentForm: FormGroup;
-	selectedFile: string;
+	selectedFile: { name: string };
 
-	constructor(private _fb: FormBuilder) {
+	constructor(private _fb: FormBuilder) {}
+
+	ngOnInit(): void {
 		this.documentForm = this._fb.group({
-			Doc_Pan: new FormControl("", [Validators.required]),
-			Doc_Gst: new FormControl("", [Validators.required]),
-			Doc_Cst: new FormControl("", [Validators.required]),
-			Doc_Vat: new FormControl("", [Validators.required]),
-			Doc_Pic_Upload: new FormControl("", [Validators.required]),
-			Doc_Name: new FormControl("", [Validators.required])
+			BM_PanNo: new FormControl(null, [Validators.required]),
+			BM_GSTNo: new FormControl(null, [Validators.required]),
+			BM_CSTNo: new FormControl(null, [Validators.required]),
+			BM_VATTIN: new FormControl(null, [Validators.required]),
+			BM_Document_Upload: new FormControl(null, [Validators.required])
 		});
+
+		if (!!this.data) {
+			this.documentForm.patchValue({
+				BM_PanNo: this.data.BM_PanNo,
+				BM_GSTNo: this.data.BM_GSTNo,
+				BM_CSTNo: this.data.BM_CSTNo,
+				BM_VATTIN: this.data.BM_VATTIN,
+				BM_Document_Upload: this.data.BM_Document_Upload
+			});
+		}
 	}
 
 	onFileChange($event) {
 		let file = $event.target.files[0];
-		this.selectedFile = file.name;
-		this.documentForm.controls["Doc_Pic_Upload"].setValue(
+		this.selectedFile = file;
+
+		this.file.emit(this.selectedFile);
+
+		this.documentForm.controls["BM_Document_Upload"].setValue(
 			file ? file.name : ""
 		);
 	}
@@ -57,7 +72,10 @@ export class DocumentDetailsComponent {
 	handleTabs(name, status?) {
 		this.tabs.emit({
 			name: name,
-			status: !!status ? status : this.documentForm.status
+			status: !!status ? status : this.documentForm.status,
+			values: this.documentForm.value,
+			additional: null,
+			back: !!status ? true : false
 		});
 	}
 }
