@@ -1,3 +1,4 @@
+import { environment } from "@env/environment";
 import { Component, ChangeDetectionStrategy, Input } from "@angular/core";
 
 // models
@@ -10,4 +11,10 @@ import * as fromModels from "../../models";
 })
 export class EmployeeCardComponent {
 	@Input() employee: fromModels.Employee;
+
+	imageUrl: string;
+
+	constructor() {
+		this.imageUrl = `${environment.baseUrl}/images`;
+	}
 }

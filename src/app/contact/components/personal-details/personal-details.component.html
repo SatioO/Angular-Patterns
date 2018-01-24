@@ -53,9 +53,8 @@
             </div>
             <div class="col-sm-3 col-xs-6">
                 <label>Contact owner</label>
-
                 <select class="form-control c-select" [attr.disabled]="view ? '': null" formControlName="Con_Owner">
-                    <option *ngFor="let option of owners" [value]="option.emp_id">{{option.name}}</option>
+                    <option *ngFor="let option of owners" [value]="option.id">{{option.name}}</option>
                 </select>
             </div>
         </div>

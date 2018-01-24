@@ -115,11 +115,9 @@ export class EmployeeFormComponent implements OnInit {
 			final = { ...final, ...this.payload[i] };
 		}
 
-		final["Emp_ID"] = `EMP-${Math.random()
-			.toString()
-			.substring(0, 8)}`;
+		final["Emp_ID"] = `EMP-${Math.floor(Math.random() * 10000000)}`;
 		final["Emp_Status"] = "A";
-		final["UpdatedBy"] = this._store.getUser()["Emp_ID"];
+		final["UpdatedBy"] = this._store.getUser()["Emp_Master_No"];
 		final["Emp_Delete_Flag"] = "N";
 		if (this.editmode) {
 			final["Emp_ID"] = this._activated.snapshot.params.id;
@@ -150,7 +148,7 @@ export class EmployeeFormComponent implements OnInit {
 						alertify
 							.logPosition("bottom right")
 							.maxLogItems(1)
-							.success("Image uploading failed.");
+							.error("Image uploading failed.");
 					}
 				);
 			} else {
@@ -174,7 +172,7 @@ export class EmployeeFormComponent implements OnInit {
 				);
 			}
 		} else {
-			final["CreatedBy"] = this._store.getUser()["Emp_ID"];
+			final["CreatedBy"] = this._store.getUser()["Emp_Master_No"];
 			this.final_payload.employee = final;
 			this._employee.upload(this.final_payload.photos).subscribe(
 				data => {

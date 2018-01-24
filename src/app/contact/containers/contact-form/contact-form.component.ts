@@ -110,17 +110,21 @@ export class ContactFormComponent implements OnInit {
 		}
 
 		if (
-			final["Con_Company_Id"] &&
+			!!final["Con_Company_Id"] &&
 			typeof final["Con_Company_Id"] === "object"
 		) {
 			final["Con_Company_Id"] = final["Con_Company_Id"]["BM_No"];
 		} else {
-			final["Con_Company_Id"] = this.data["Con_Company_Id"];
+			if (this.data) {
+				final["Con_Company_Id"] = this.data["Con_Company_Id"];
+			} else {
+				final["Con_Company_Id"] = null;
+			}
 		}
 
 		final["Con_Status_Flag"] = "T";
-		final["CreatedBy"] = this._store.getUser()["Emp_ID"];
-		final["UpdatedBy"] = this._store.getUser()["Emp_ID"];
+		final["CreatedBy"] = this._store.getUser()["Emp_Master_No"];
+		final["UpdatedBy"] = this._store.getUser()["Emp_Master_No"];
 
 		let form$: Observable<any>;
 

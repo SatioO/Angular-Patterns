@@ -12,6 +12,8 @@ export interface Employee {
 	Emp_BloodG: string;
 	Emp_CCode: number;
 	Emp_City: string;
+	Emp_City_Name: string;
+	Emp_State_Name: string;
 	Emp_City2: string;
 	Emp_Country: string;
 	Emp_Country2: string;

@@ -1,9 +1,11 @@
 <div class="contact-box">
   <a href="" [routerLink]="[employee.Emp_ID]">
     <div class="col-sm-4">
-      <div class="text-center">
-        <img alt="image" class="img-circle m-t-xs img-responsive" src="images/a4.jpg">
-        <div class="m-t-xs font-bold">Employee {{employee.Emp_ID}}</div>
+      <div class="text-center" id="holder">
+        <img alt="image" class="img-circle m-t-xs img-responsive" style="height:60px; width: 60px;" src="{{imageUrl}}/{{employee.Emp_Name}}{{employee.Emp_Surname}}/{{employee.Emp_Pic_Upload}}">
+        <div class="m-t-xs font-bold">Employee
+          <p>{{employee.Emp_ID}}</p>
+        </div>
       </div>
     </div>
     <div class="col-sm-8">
