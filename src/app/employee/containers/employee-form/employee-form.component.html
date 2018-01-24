@@ -33,7 +33,7 @@
       </div>
       <div id="tab-4" class="tab-pane" [class.active]="tabs.document === true">
         <div class="panel-body">
-          <document-details [store]="store" [data]="data" [view]="viewmode" (tabs)="handleTabs(null, $event)"></document-details>
+          <document-details [store]="store" [data]="data" [view]="viewmode" (file)="handleDocs($event)" (tabs)="handleTabs(null, $event)"></document-details>
         </div>
       </div>
       <br />

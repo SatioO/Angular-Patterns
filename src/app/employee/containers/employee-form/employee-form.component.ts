@@ -39,7 +39,7 @@ export class EmployeeFormComponent implements OnInit {
 	};
 
 	payload: { [key: string]: object } = {};
-	final_payload = { employee: null, photos: null };
+	final_payload = { employee: null, photos: null, docs: null };
 	editmode: boolean = false;
 
 	constructor(
@@ -103,8 +103,29 @@ export class EmployeeFormComponent implements OnInit {
 	}
 
 	handleFile($event) {
-		const formData = new FormData();
-		formData.append("photos", $event, $event.name);
+		this.final_payload.photos = $event;
+		const formData: any = new FormData();
+		formData.append("uploads[]", $event, $event.name);
+		this.final_payload.docs = formData;
+	}
+
+	handleDocs($event) {
+		const formData: any = new FormData();
+		const files: Array<File> = $event;
+
+		for (let i = 0; i < files.length; i++) {
+			formData.append("uploads[]", files[i], files[i]["name"]);
+		}
+
+		if (!!this.final_payload.photos) {
+			formData.append(
+				"uploads[]",
+				this.final_payload.photos,
+				this.final_payload.photos.name
+			);
+		}
+
+		this.final_payload.docs = null;
 		this.final_payload.photos = formData;
 	}
 
@@ -113,6 +134,10 @@ export class EmployeeFormComponent implements OnInit {
 
 		for (let i in this.payload) {
 			final = { ...final, ...this.payload[i] };
+		}
+
+		if (!!this.final_payload.docs) {
+			this.final_payload.photos = this.final_payload.docs;
 		}
 
 		final["Emp_ID"] = `EMP-${Math.floor(Math.random() * 10000000)}`;
@@ -174,6 +199,7 @@ export class EmployeeFormComponent implements OnInit {
 		} else {
 			final["CreatedBy"] = this._store.getUser()["Emp_Master_No"];
 			this.final_payload.employee = final;
+
 			this._employee.upload(this.final_payload.photos).subscribe(
 				data => {
 					this._employee.saveEmployees(this.final_payload).subscribe(
@@ -182,7 +208,6 @@ export class EmployeeFormComponent implements OnInit {
 								.logPosition("bottom right")
 								.maxLogItems(1)
 								.success("Employee created successfully.");
-
 							this._router.navigate(["/employee/view"]);
 						},
 						error => {
@@ -190,7 +215,6 @@ export class EmployeeFormComponent implements OnInit {
 								.logPosition("bottom right")
 								.maxLogItems(1)
 								.error("Something Went Wrong.");
-
 							this._router.navigate(["/employee/view"]);
 						}
 					);

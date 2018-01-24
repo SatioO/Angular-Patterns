@@ -41,6 +41,11 @@
         <label>Bank IFSC Code</label>
         <input type="text" class="form-control" [attr.disabled]="view ? '': null" formControlName="Emp_IFSC_Code" placeholder="">
       </div>
+      <div class="col-sm-3">
+        <label>Upload Documents</label>
+        <input type="file" multiple (change)="documentChangeEvent($event)" class="form-control" [attr.disabled]="view ? '': null"
+          formControlName="Emp_Docs" placeholder="">
+      </div>
     </div>
     <button type="submit" (click)="handleTabs('final')" *ngIf="!view" [disabled]="documentForm.status !== 'VALID'" class="btn btn-success">Submit</button>
     <input type="button" (click)="handleTabs('family', 'VALID')" *ngIf="!view" value="back" class="btn btn-danger" />

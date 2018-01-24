@@ -28,8 +28,10 @@ export class DocumentDetailsComponent implements OnInit {
 	@Input() data: { [key: string]: fromModels.Employee[] };
 	@Input() view: boolean;
 	@Output() tabs = new EventEmitter<any>();
+	@Output() file = new EventEmitter<any>();
 
 	documentForm: FormGroup;
+	filesToUpload: Array<File> = [];
 
 	constructor(private _fb: FormBuilder) {}
 
@@ -60,7 +62,8 @@ export class DocumentDetailsComponent implements OnInit {
 			Emp_IFSC_Code: new FormControl(null, [
 				Validators.minLength(4),
 				Validators.maxLength(50)
-			])
+			]),
+			Emp_Docs: new FormControl(null, [])
 		});
 		if (this.data) {
 			this.documentForm.patchValue({
@@ -77,7 +80,7 @@ export class DocumentDetailsComponent implements OnInit {
 		}
 	}
 
-	handleTabs(name, status?) {
+	private handleTabs(name, status?) {
 		this.tabs.emit({
 			name: name,
 			status: !!status ? status : this.documentForm.status,
@@ -86,6 +89,11 @@ export class DocumentDetailsComponent implements OnInit {
 			submit: true,
 			back: !!status ? true : false
 		});
+	}
+
+	public documentChangeEvent(fileInput: any) {
+		this.filesToUpload = <Array<File>>fileInput.target.files;
+		this.file.emit(this.filesToUpload);
 	}
 
 	private extractDate(date) {
