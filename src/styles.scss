@@ -78,6 +78,18 @@ label.file-upload__label::after {
 	border-color: #ed5565;
 }
 
+#holder
+{
+	position:absolute;
+	width:100%;
+	height:100%;
+}
+#holder img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .relations {
 	float: left !important;
 	vertical-align: middle;

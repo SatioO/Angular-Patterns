@@ -53,6 +53,7 @@ export class ContactService {
 				map(employees =>
 					employees.map(employee => {
 						return {
+							id: employee.Emp_Master_No,
 							emp_id: employee.Emp_ID,
 							name: employee.Emp_Name + " " + employee.Emp_Surname
 						};
