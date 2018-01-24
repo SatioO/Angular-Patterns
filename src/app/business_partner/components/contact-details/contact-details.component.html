@@ -1,55 +1,56 @@
 <form role="form" [formGroup]="contactForm">
     <div class="col-xs-12">
-        <div class="form-group row">
-            <div class="col-sm-3">
-                <label style="display:block;">Phone Number</label>
-                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" style="width:35%; display: inline-block" placeholder="Code"
-                    formControlName="Con_CCode">
-                <input type="number" class="form-control" [attr.disabled]="view ? '' : null" style="width:calc(65% - 4px);display:inline-block;"
-                    placeholder="Phone Number" formControlName="Con_Phone">
-            </div>
-            <div class="col-sm-3">
-                <label style="display:block;">Mobile Number</label>
-                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" style="width:35%; display: inline-block" placeholder="Code"
-                    readonly="" formControlName="Con_MCode">
-                <input type="number" class="form-control" [attr.disabled]="view ? '' : null" style="width:calc(65% - 4px);display:inline-block;"
-                    placeholder="Mobile Number" formControlName="Con_Mobile">
-            </div>
-            <div class="col-sm-3">
-                <label style="display:block;">Alternate Number</label>
-                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" style="width:35%; display: inline-block" placeholder="Code"
-                    readonly="" formControlName="Con_AMCode">
-                <input type="number" class="form-control" [attr.disabled]="view ? '' : null" style="width:calc(65% - 4px);display:inline-block;"
-                    placeholder="Mobile Number" formControlName="Con_AMobile">
-            </div>
-        </div>
+
         <div class="form-group row">
             <div class="col-sm-3">
                 <label>Current Address</label>
                 <textarea class="form-control" [attr.disabled]="view ? '' : null" style="min-height:97px" autosize rows=4 placeholder="Address"
-                    formControlName="Con_Add1"></textarea>
+                    formControlName="BM_OffAddress"></textarea>
             </div>
             <div class="col-sm-3">
                 <label>Country</label>
-                <select class="form-control" [attr.disabled]="view ? '' : null" (change)="handleToggle('country', $event)" formControlName="Con_Country">
-                    <option *ngFor="let country of countries" [selected]="country.id === Con_Country" [value]="country.id">{{country.name}}</option>
+                <select class="form-control" [attr.disabled]="view ? '' : null" (change)="handleToggle('country', $event)" formControlName="BM_Country">
+                    <option *ngFor="let country of countries" [selected]="country.id === BM_Country" [value]="country.id">{{country.name}}</option>
                 </select>
             </div>
             <div class="col-sm-3">
                 <label>State</label>
-                <select class="form-control" [attr.disabled]="view ? '' : null" (change)="handleToggle('states', $event)" formControlName="Con_State">
-                    <option *ngFor="let state of states" [selected]="state.id === Con_State" [value]="state.id">{{state.name}}</option>
+                <select class="form-control" [attr.disabled]="view ? '' : null" (change)="handleToggle('states', $event)" formControlName="BM_State">
+                    <option *ngFor="let state of states" [selected]="state.id === BM_State" [value]="state.id">{{state.name}}</option>
                 </select>
             </div>
             <div class="col-sm-3">
                 <label>City</label>
-                <select class="form-control" [attr.disabled]="view ? '' : null" formControlName="Con_City">
-                    <option *ngFor="let city of cities" [selected]="city.id === Con_City" [value]="city.id">{{city.name}}</option>
+                <select class="form-control" [attr.disabled]="view ? '' : null" formControlName="BM_City">
+                    <option *ngFor="let city of cities" [selected]="city.id === BM_City" [value]="city.id">{{city.name}}</option>
                 </select>
             </div>
             <div class="col-sm-3">
                 <label>Pincode</label>
-                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" placeholder="Pincode" formControlName="Con_Pincode">
+                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" placeholder="Pincode" formControlName="BM_Pincode">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <label style="display:block;">Phone Number</label>
+                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" style="width:35%; display: inline-block" placeholder="Code"
+                    formControlName="BM_CCode">
+                <input type="number" class="form-control" [attr.disabled]="view ? '' : null" style="width:calc(65% - 4px);display:inline-block;"
+                    placeholder="Phone Number" formControlName="BM_OfficePhone">
+            </div>
+            <div class="col-sm-3">
+                <label style="display:block;">Mobile Number</label>
+                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" style="width:35%; display: inline-block" placeholder="Code"
+                    readonly="" formControlName="BM_MCode">
+                <input type="number" class="form-control" [attr.disabled]="view ? '' : null" style="width:calc(65% - 4px);display:inline-block;"
+                    placeholder="Mobile Number" formControlName="BM_Mobile">
+            </div>
+            <div class="col-sm-3">
+                <label style="display:block;">Alternate Number</label>
+                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" style="width:35%; display: inline-block" placeholder="Code"
+                    readonly="" formControlName="BM_AMCode">
+                <input type="number" class="form-control" [attr.disabled]="view ? '' : null" style="width:calc(65% - 4px);display:inline-block;"
+                    placeholder="Mobile Number" formControlName="BM_AMobile">
             </div>
         </div>
         <br />
@@ -62,32 +63,32 @@
             <div class="col-sm-3">
                 <label>Permanent Address</label>
                 <textarea class="form-control" [attr.disabled]="view ? '' : null" style="min-height:97px" autosize rows="4" placeholder="Address"
-                    formControlName="Con_Add2"></textarea>
+                    formControlName="BM_WarehouseAdd"></textarea>
             </div>
             <div class="col-sm-3">
                 <label>Country</label>
-                <select class="form-control" [attr.disabled]="view ? '' : null" formControlName="Con_Country2" (change)="handleToggle('country', $event)">
+                <select class="form-control" [attr.disabled]="view ? '' : null" formControlName="BM_WCountry" (change)="handleToggle('country', $event)">
                     <option *ngFor="let country of countries" [selected]="country.id === Emp_Country2" [value]="country.id">{{country.name}}</option>
                 </select>
             </div>
             <div class="col-sm-3">
                 <label>State</label>
-                <select class="form-control" [attr.disabled]="view ? '' : null" formControlName="Con_State2">
+                <select class="form-control" [attr.disabled]="view ? '' : null" formControlName="BM_WState">
                     <option *ngFor="let state of states" [selected]="state.id === Emp_State2" [value]="state.id">{{state.name}}</option>
                 </select>
             </div>
             <div class="col-sm-3">
                 <label>City</label>
-                <select class="form-control" [attr.disabled]="view ? '' : null" formControlName="Con_City2">
+                <select class="form-control" [attr.disabled]="view ? '' : null" formControlName="BM_WCity">
                     <option *ngFor="let city of cities" [selected]="city.id === Emp_City2" [value]="city.id">{{city.name}}</option>
                 </select>
             </div>
             <div class="col-sm-3">
                 <label>Pincode</label>
-                <input type="number" [attr.disabled]="view ? '' : null" class="form-control" placeholder="Pincode" formControlName="Con_Pincode2">
+                <input type="number" [attr.disabled]="view ? '' : null" class="form-control" placeholder="Pincode" formControlName="BM_WPincode">
             </div>
         </div>
-        <button type="submit" (click)="handleSubmit()" [disabled]="contactForm.status !== 'VALID'" class="btn btn-success">Submit</button>
-        <input type="button" (click)="handleTabs('bankdetails', 'VALID')" value="back" class="btn btn-danger" />
+        <button type="submit" (click)="handleTabs('final')" *ngIf="!view" [disabled]="contactForm.status !== 'VALID'" class="btn btn-success">Submit</button>
+        <input type="button" (click)="handleTabs('bank', 'VALID')" *ngIf="!view" value="back" class="btn btn-danger" />
     </div>
 </form>

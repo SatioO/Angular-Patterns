@@ -86,6 +86,8 @@ export interface Employee {
 	Emp_Surname: string;
 	Emp_Title: string;
 	Emp_Twitter: string;
+	Emp_City_Name: string;
+	Emp_State_Name: string;
 	UpdatedBy: number;
 	Updated_Date: string;
 }

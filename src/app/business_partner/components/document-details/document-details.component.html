@@ -3,19 +3,19 @@
         <div class="form-group row">
             <div class="col-sm-3">
                 <label>Pan Number</label>
-                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Doc_Pan" placeholder="Pan Number">
+                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="BM_PanNo" placeholder="Pan Number">
             </div>
             <div class="col-sm-3">
                 <label>GST Number</label>
-                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Doc_Gst" placeholder="GST Number">
+                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="BM_GSTNo" placeholder="GST Number">
             </div>
             <div class="col-sm-3">
                 <label>CST Number</label>
-                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Doc_Cst" placeholder="CST Number">
+                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="BM_CSTNo" placeholder="CST Number">
             </div>
             <div class="col-sm-3">
                 <label>VAT Tin</label>
-                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Doc_Vat" placeholder="VAT Tin">
+                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="BM_VATTIN" placeholder="VAT Tin">
             </div>
         </div>
         <div class="form-group row">
@@ -23,18 +23,14 @@
                 <label>Upload Documents:</label>
                 <input id="upload" [attr.disabled]="view ? '' : null" accept="image/*" type="file" name="file-upload" (change)="onFileChange($event)"
                 />
-                <input type="hidden" name="fileHidden" formControlName="Doc_Pic_Upload" />
+                <input type="hidden" name="fileHidden" formControlName="BM_Document_Upload" />
 
             </div>
 
-            <div class="col-sm-3">
-                <label>Document Name</label>
-                <input type="text" class="form-control" [attr.disabled]="view ? '' : null" formControlName="Doc_Name" placeholder="Documents Name">
-            </div>
 
         </div>
         <br/>
-        <button type="submit" (click)="handleTabs('bankdetails')" [disabled]="documentForm.status !== 'VALID'" class="btn btn-success">Next</button>
-        <input type="button" (click)="handleTabs('personaldetais', 'VALID')" value="back" class="btn btn-danger" />
+        <button type="submit" (click)="handleTabs('bank')" *ngIf="!view" [disabled]="documentForm.status !== 'VALID'" class="btn btn-success">Next</button>
+        <input type="button" (click)="handleTabs('personal', 'VALID')" *ngIf="!view" value="back" class="btn btn-danger" />
     </div>
 </form>

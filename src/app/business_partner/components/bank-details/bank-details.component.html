@@ -14,33 +14,29 @@
                 <div class="form-group row" *ngFor="let i of bank;">
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                         <label>Beneficiary Name</label>
-                        <input type="text" [attr.disabled]="view ? '' : null" class="form-control" [formControlName]="'Bank_FC'+ i + '_BeneficiaryName'"
+                        <input type="text" [attr.disabled]="view ? '' : null" class="form-control" [formControlName]="'BM'+ i + '_Beneficiary_Name'"
                             placeholder="Beneficiary Name">
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                         <label style="display:block;">Bank Name</label>
-                        <input type="text" [attr.disabled]="view ? '' : null" class="form-control" [formControlName]="'Bank_FC'+ i + '_BankName'"
-                            placeholder="Bank Name">
+                        <input type="text" [attr.disabled]="view ? '' : null" class="form-control" [formControlName]="'BM'+ i + '_Bank_Name'" placeholder="Bank Name">
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                         <label>Bank Branch </label>
-                        <input type="text" [attr.disabled]="view ? '' : null" class="form-control" [formControlName]="'Bank_FC'+ i + '_BankBranch'"
-                            placeholder="Bank Branch">
+                        <input type="text" [attr.disabled]="view ? '' : null" class="form-control" [formControlName]="'BM'+ i + '_Bank_Branch'" placeholder="Bank Branch">
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                         <label>Bank A/C Number </label>
-                        <input type="text" [attr.disabled]="view ? '' : null" class="form-control" [formControlName]="'Bank_FC'+ i + '_BankNumber'"
-                            placeholder="Bank A/C Number">
+                        <input type="text" [attr.disabled]="view ? '' : null" class="form-control" [formControlName]="'BM'+ i + '_Bank_AccNo'" placeholder="Bank A/C Number">
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                         <label>Bank IFSC Code </label>
-                        <input type="text" [attr.disabled]="view ? '' : null" class="form-control" [formControlName]="'Bank_FC'+ i + '_BankIFSC'"
-                            placeholder="Bank IFSC Code">
+                        <input type="text" [attr.disabled]="view ? '' : null" class="form-control" [formControlName]="'BM'+ i + '_IFSC_Code'" placeholder="Bank IFSC Code">
                     </div>
                 </div>
             </div>
         </div>
-        <button type="submit" (click)="handleTabs('contactdetails')" [disabled]="bankForm.status !== 'VALID'" class="btn btn-success">Next</button>
-        <input type="button" (click)="handleTabs('documentdetails', 'VALID')" value="back" class="btn btn-danger" />
+        <button type="submit" (click)="handleTabs('contact')" *ngIf="!view" [disabled]="bankForm.status !== 'VALID'" class="btn btn-success">Next</button>
+        <input type="button" (click)="handleTabs('document', 'VALID')" *ngIf="!view" value="back" class="btn btn-danger" />
     </div>
 </form>
