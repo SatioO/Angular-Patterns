@@ -92,7 +92,17 @@ export class DocumentDetailsComponent implements OnInit {
 	}
 
 	public documentChangeEvent(fileInput: any) {
-		this.filesToUpload = <Array<File>>fileInput.target.files;
+		this.filesToUpload = fileInput.target.files;
+		const filenames: Array<string> = [];
+
+		for (let i = 0; i < this.filesToUpload.length; i++) {
+			filenames.push(this.filesToUpload[i]["name"].toString());
+		}
+
+		this.documentForm.patchValue({
+			Emp_Docs: JSON.stringify(filenames)
+		});
+
 		this.file.emit(this.filesToUpload);
 	}
 

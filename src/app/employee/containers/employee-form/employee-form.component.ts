@@ -145,7 +145,10 @@ export class EmployeeFormComponent implements OnInit {
 		final["UpdatedBy"] = this._store.getUser()["Emp_Master_No"];
 		final["Emp_Delete_Flag"] = "N";
 		if (this.editmode) {
-			final["Emp_ID"] = this._activated.snapshot.params.id;
+			final["Emp_Master_No"] = this._activated.snapshot.params.id;
+			if (this.final_payload.photos) {
+				final["Attached"] = true;
+			}
 			this.final_payload.employee = final;
 			if (!!this.final_payload.photos) {
 				this._employee.upload(this.final_payload.photos).subscribe(
@@ -238,5 +241,37 @@ export class EmployeeFormComponent implements OnInit {
 			family: false,
 			document: false
 		};
+	}
+
+	handleDelete() {
+		this.viewmode = true;
+		this.editmode = false;
+		this.tabs = {
+			personal: true,
+			contact: false,
+			family: false,
+			document: false
+		};
+
+		this._employee.delete(this._activated.snapshot.params.id).subscribe(
+			data => {
+				alertify
+					.logPosition("bottom right")
+					.maxLogItems(1)
+					.success("Employee Deleted Sucessfully.");
+
+				this._employee.employees = null;
+
+				this._router.navigate(["/employee/view"]);
+			},
+			error => {
+				alertify
+					.logPosition("bottom right")
+					.maxLogItems(1)
+					.error("Something Went Wrong.");
+
+				this._router.navigate(["/employee/view"]);
+			}
+		);
 	}
 }

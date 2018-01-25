@@ -37,6 +37,12 @@ export class EmployeeService {
 		return this._http.put(`${environment.baseUrl}/employee`, employee);
 	}
 
+	delete(employee_id) {
+		return this._http.delete(
+			`${environment.baseUrl}/employee?id=${employee_id}`
+		);
+	}
+
 	upload(picture) {
 		return this._http.post(
 			`${environment.baseUrl}/employee/upload`,
@@ -52,7 +58,7 @@ export class EmployeeService {
 			) => {
 				return {
 					...entities,
-					[employee.Emp_ID]: employee
+					[employee.Emp_Master_No]: employee
 				};
 			},
 			{}

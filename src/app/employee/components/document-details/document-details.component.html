@@ -44,7 +44,8 @@
       <div class="col-sm-3">
         <label>Upload Documents</label>
         <input type="file" multiple (change)="documentChangeEvent($event)" class="form-control" [attr.disabled]="view ? '': null"
-          formControlName="Emp_Docs" placeholder="">
+          placeholder="">
+        <input type="hidden" name="fileHidden" formControlName="Emp_Docs" />
       </div>
     </div>
     <button type="submit" (click)="handleTabs('final')" *ngIf="!view" [disabled]="documentForm.status !== 'VALID'" class="btn btn-success">Submit</button>
